@@ -1,6 +1,8 @@
 # compiled output
 /dist
 /node_modules
+/nest-server/node_modules
+/nest-server/dist
 
 # Logs
 logs
