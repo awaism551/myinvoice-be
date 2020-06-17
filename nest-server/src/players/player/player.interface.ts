@@ -1,6 +1,4 @@
-import * as mongoose from 'mongoose';
-
-export interface PlayerInterface extends mongoose.Document {
+export interface PlayerInterface {
 	name: string,
 	role: string
 }

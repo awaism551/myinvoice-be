@@ -12,6 +12,7 @@ export class PlayerController {
 
 	@Get('getAll')
 	getPlayers() {
+		// return 'player::getAll function';
 		return this.playerService.getPlayers();
 	}
 
@@ -19,7 +20,8 @@ export class PlayerController {
 	getSinglePlayer(
 		@Param('id') id: string
 	) {
-		return this.playerService.getSinglePlayer(id);
+		return 'player::get single player fun';
+		// return this.playerService.getSinglePlayer(id);
 	}
 
 	@Post('create')
@@ -27,8 +29,8 @@ export class PlayerController {
 		@Body('name') name: string,
 		@Body('role') role: string
 	) {
-		const newPlayerId = await this.playerService.createPlayer(name, role);
-		return newPlayerId;
+		// const newPlayerId = await this.playerService.createPlayer(name, role);
+		// return newPlayerId;
 	}
 
 	@Patch('update/:id')
@@ -37,14 +39,14 @@ export class PlayerController {
 		@Body('name') name: string,
 		@Body('role') role: string,
 	) {
-		await this.playerService.updatePlayer(playerId, name, role);
-		return "updated";
+		// await this.playerService.updatePlayer(playerId, name, role);
+		// return "updated";
 	}
 
 	@Delete('remove/:id')
 	async removePlayer(@Param('id') playerId: string) {
-		await this.playerService.removePlayer(playerId);
-		return "removed";
+		// await this.playerService.removePlayer(playerId);
+		// return "removed";
 	}
 
 }

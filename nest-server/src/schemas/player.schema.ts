@@ -1,7 +1,7 @@
-import * as mongoose from 'mongoose';
+// import * as mongoose from 'mongoose';
 
-export const PlayerSchema = new mongoose.Schema({
-	id: Number,
-	name: String,
-	role: String,
-});
+// export const PlayerSchema = new mongoose.Schema({
+// 	id: Number,
+// 	name: String,
+// 	role: String,
+// });
