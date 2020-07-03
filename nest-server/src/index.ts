@@ -6,8 +6,12 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
 const server = express();
+const firebaseApp = admin.initializeApp();
+const database = firebaseApp.firestore();
 
-// admin.initializeApp();
+database.settings({
+	ignoreUndefinedProperties: true
+});
 
 export const createNestServer = async (expressInstance) => {
 	const app = await NestFactory.create(
@@ -23,3 +27,6 @@ createNestServer(server)
 	.catch(err => console.error('Nest broken', err));
 
 export const api = functions.https.onRequest(server);
+export {
+	database
+};

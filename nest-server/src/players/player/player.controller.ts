@@ -20,8 +20,8 @@ export class PlayerController {
 	getSinglePlayer(
 		@Param('id') id: string
 	) {
-		return 'player::get single player fun';
-		// return this.playerService.getSinglePlayer(id);
+		// return 'player::get single player fun';
+		return this.playerService.getSinglePlayer(id);
 	}
 
 	@Post('create')
@@ -29,8 +29,8 @@ export class PlayerController {
 		@Body('name') name: string,
 		@Body('role') role: string
 	) {
-		// const newPlayerId = await this.playerService.createPlayer(name, role);
-		// return newPlayerId;
+		const newPlayerId = await this.playerService.createPlayer(name, role);
+		return newPlayerId;
 	}
 
 	@Patch('update/:id')
