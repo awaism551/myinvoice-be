@@ -39,14 +39,14 @@ export class PlayerController {
 		@Body('name') name: string,
 		@Body('role') role: string,
 	) {
-		// await this.playerService.updatePlayer(playerId, name, role);
-		// return "updated";
+		let status = await this.playerService.updatePlayer(playerId, name, role);
+		return status ? "updated" : "not updated";
 	}
 
 	@Delete('remove/:id')
 	async removePlayer(@Param('id') playerId: string) {
-		// await this.playerService.removePlayer(playerId);
-		// return "removed";
+		let status = await this.playerService.removePlayer(playerId);
+		return status ? "deleted" : "not deleted";
 	}
 
 }

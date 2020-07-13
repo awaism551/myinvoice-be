@@ -19,23 +19,26 @@ export class PlayerService {
 	async getCollectionRef() {
 	}
 
-	async createPlayer(name, role) {
+	async createPlayer(name, role): Promise<number> {
 
 		this.collection = await db.collection('players');
-		console.log('create player fun');
-		this.collection.add(
+		// console.log('create player fun');
+		let id = await this.collection.add(
 			{
 				name: name,
 				role: role
 			}
 		)
 			.then(documentReference => {
-				console.log(`Added document with name: ${documentReference.id}`);
+				// console.log(`Added document with name: ${documentReference.id}`);
 				return documentReference.id;
 			})
 			.catch(error => {
 				console.log('error::', error);
 			});
+
+		// console.log('player service:: id', id)
+		return id;
 
 		// let collectionRef = firestore.collection('col');
 		// const newPlayer = new this.playerModel({
@@ -71,7 +74,9 @@ export class PlayerService {
 				let players = [];
 				snapshot.forEach(doc => {
 					// console.log(doc.id, '=>', doc.data());
-					players.push(doc.data());
+					let obj = doc.data();
+					obj.id = doc.id;
+					players.push(obj);
 				});
 				// console.log('player1s::', players);
 				return players;
@@ -91,7 +96,7 @@ export class PlayerService {
 		try {
 			player = await this.collection.doc(id).get()
 				.then((docRef) => {
-					console.log(docRef.data());
+					// console.log(docRef.data());
 					return docRef.data();
 				})
 				.catch((error) => {
@@ -108,23 +113,58 @@ export class PlayerService {
 		return player;
 	}
 
-	// async updatePlayer(
-	// 	playerId: string,
-	// 	name: string,
-	// 	role: string
-	// ) {
-	// 	const player = await this.getSinglePlayer(playerId);
-	// 	player.name = name;
-	// 	player.role = role;
-	// 	player.save();
-	// }
+	async updatePlayer(
+		playerId: string,
+		name: string,
+		role: string
+	): Promise<boolean> {
+		this.collection = await db.collection('players');
+		let status: boolean = false;
+		try {
+			let documentRef = this.collection.doc(playerId);
+			status = await documentRef.update({
+				name: name,
+				role: role
+			})
+				.then(res => {
+					// console.log(`Document updated at ${res.updateTime}`);
+					return true;
+				});
+		} catch (error) {
+			console.log('error updating document::', error);
+			status = false;
+		}
+		return status;
 
-	// async removePlayer(playerId: string) {
-	// 	const result = await this.playerModel.deleteOne({ _id: playerId }).exec();
-	// 	if (result.n === 0) {
-	// 		throw new NotFoundException('Could not find player.');
-	// 	}
-	// }
+		// const player = await this.getSinglePlayer(playerId);
+		// player.name = name;
+		// player.role = role;
+		// player.save();
+	}
+
+	async removePlayer(playerId: string) {
+
+		this.collection = await db.collection('players');
+		let status: boolean = false;
+		try {
+			let documentRef = this.collection.doc(playerId);
+			status = await documentRef.delete()
+				.then(() => {
+					return true;
+				});
+		} catch (error) {
+			console.log('error deleting document::', error);
+			status = false;
+		}
+		return status;
+
+
+
+		// const result = await this.playerModel.deleteOne({ _id: playerId }).exec();
+		// if (result.n === 0) {
+		// 	throw new NotFoundException('Could not find player.');
+		// }
+	}
 
 }
 

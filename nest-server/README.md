@@ -1,6 +1,7 @@
-nest-js firebase combination app (Planning to implement below all features of firebase in this app)
-firestore db
-crud implementation
+ROADMAP
+
+firestore db: done
+crud implementation: done
 firebase auth
 firebase storage
 firebase hosting
