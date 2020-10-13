@@ -1,21 +1,37 @@
 {
-	"name": "myinvoice-be-express",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"tsc": "tsc",
-		"dev": "tsc && nodemon server/server.ts"
-	},
-	"author": "Awais",
-	"license": "ISC",
-	"dependencies": {
-		"@types/express": "^4.17.8",
-		"apollo-server-express": "^2.18.2",
-		"express": "^4.17.1",
-		"nodemon": "^2.0.4",
-		"typescript": "^4.0.3"
-	},
-	"devDependencies": {}
+  "name": "myinvoice-be-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "dev": "nodemon src/Public/app.ts",
+    "vscode-debug": "node --inspect -r ts-node/register src/Public/app.ts"
+  },
+  "author": "Awais",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.8",
+    "apollo-server-express": "^2.18.2",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "ts-node": "^9.0.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "npm run vscode-debug",
+    "ext": "ts"
+  }
 }
