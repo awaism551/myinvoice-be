@@ -1,3 +1,5 @@
+import { itemCategoriesService } from '../../../../shared/services/itemCategories.service';
+
 export let itemCategoriesQueryResolver = async () => {
-  return 'Ertugrul';
+  return itemCategoriesService.getItemCategories();
 };

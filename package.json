@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
     "dev": "nodemon src/Public/app.ts",
-    "vscode-debug": "node --inspect -r ts-node/register src/Public/app.ts"
+    "vscode-debug": "node --inspect=127.0.0.1:9230 -r ts-node/register src/Public/app.ts"
   },
   "author": "Awais",
   "license": "ISC",
@@ -19,6 +19,8 @@
     "typescript": "^4.0.3"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.17.10",
+    "@graphql-codegen/typescript": "^1.17.10",
     "ts-node": "^9.0.0"
   },
   "nodemonConfig": {
