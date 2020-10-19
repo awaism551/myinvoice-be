@@ -6,6 +6,7 @@ const { ApolloServer, gql } = require('apollo-server-express');
 // Construct a schema, using GraphQL schema language
 const typeDef = gql`
   type Query
+  type Mutation
 `;
 
 // Provide resolver functions for your schema fields

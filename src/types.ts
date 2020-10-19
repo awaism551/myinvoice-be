@@ -22,6 +22,16 @@ export type QueryItemCategoryArgs = {
   itemCategoryId: Scalars['ID'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createItemCategory?: Maybe<ItemCategory>;
+};
+
+
+export type MutationCreateItemCategoryArgs = {
+  title: Scalars['String'];
+};
+
 export type ItemCategory = {
   __typename?: 'ItemCategory';
   id: Scalars['ID'];
