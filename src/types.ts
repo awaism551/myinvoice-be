@@ -25,11 +25,24 @@ export type QueryItemCategoryArgs = {
 export type Mutation = {
   __typename?: 'Mutation';
   createItemCategory?: Maybe<ItemCategory>;
+  updateItemCategory?: Maybe<ItemCategory>;
+  deleteItemCategory?: Maybe<Scalars['Boolean']>;
 };
 
 
 export type MutationCreateItemCategoryArgs = {
   title: Scalars['String'];
+};
+
+
+export type MutationUpdateItemCategoryArgs = {
+  itemCategoryId: Scalars['ID'];
+  title: Scalars['String'];
+};
+
+
+export type MutationDeleteItemCategoryArgs = {
+  itemCategoryId: Scalars['ID'];
 };
 
 export type ItemCategory = {

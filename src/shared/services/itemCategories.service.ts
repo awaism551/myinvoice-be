@@ -1,42 +1,49 @@
 import { ItemCategory } from '../../types';
+const Category = require('../../../models/index').Category;
 
 class ItemCategoriesService {
-  private itemCategories: ItemCategory[] = [];
+  constructor() {}
 
-  constructor() {
-    this.itemCategories = [
-      {
-        id: '1',
-        title: 'drink',
-      },
-      {
-        id: '2',
-        title: 'biscuit',
-      },
-      {
-        id: '3',
-        title: 'game',
-      },
-    ];
+  async getItemCategories() {
+    try {
+      return await Category.findAll({
+        raw: true,
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
   }
 
-  getItemCategories() {
-    return this.itemCategories;
+  async getItemCategory(id: string) {
+    try {
+      return await Category.findByPk(id, {
+        raw: true,
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
   }
 
-  getItemCategory(id: string) {
-    return this.itemCategories.find((category) => category.id === id);
+  async createItemCategory(title: string) {
+    return await Category.create({ title });
   }
 
-  createItemCategory(title: string) {
-    let newItemCategory: ItemCategory = {
-      id: (
-        +this.itemCategories[this.itemCategories.length - 1].id + 1
-      ).toString(),
-      title,
-    };
-    this.itemCategories.push(newItemCategory);
-    return newItemCategory;
+  async updateItemCategory(id: string, title: string) {
+    let result;
+    try {
+      result = await Category.update({ title }, { where: { id } });
+      if (result[0] === 1) {
+        return await Category.findByPk(id, {
+          raw: true,
+        });
+      }
+    } catch (error) {
+      console.log('error update::', error);
+    }
+  }
+
+  async deleteItemCategory(id: string) {
+    return (await Category.destroy({ where: { id } })) === 1 ? true : false;
   }
 }
 

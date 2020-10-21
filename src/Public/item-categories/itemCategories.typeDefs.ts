@@ -8,6 +8,8 @@ export const typeDef = gql`
 
   extend type Mutation {
     createItemCategory(title: String!): ItemCategory
+    updateItemCategory(itemCategoryId: ID!, title: String!): ItemCategory
+    deleteItemCategory(itemCategoryId: ID!): Boolean
   }
 
   type ItemCategory {
