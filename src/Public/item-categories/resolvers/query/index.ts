@@ -1,5 +1,7 @@
-import { itemCategoriesQueryResolver } from './itemCategories-query.resolver';
-import { itemCategoryQueryResolver } from './itemCategory-query.resolver';
+import {
+  itemCategoriesQueryResolver,
+  itemCategoryQueryResolver,
+} from './item-category-query.resolver';
 
 export let Query = {
   itemCategories: itemCategoriesQueryResolver,

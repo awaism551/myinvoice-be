@@ -9,3 +9,7 @@ export let itemCategoryQueryResolver = async (
 ) => {
   return itemCategoriesService.getItemCategory(args.itemCategoryId);
 };
+
+export let itemCategoriesQueryResolver = async () => {
+  return itemCategoriesService.getItemCategories();
+};

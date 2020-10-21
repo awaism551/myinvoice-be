@@ -1,4 +1,5 @@
 import { itemCategories } from './item-categories';
+import { items } from './items';
 
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
@@ -10,9 +11,9 @@ const typeDef = gql`
 `;
 
 // Provide resolver functions for your schema fields
-const resolvers = [itemCategories.resolvers];
+const resolvers = [itemCategories.resolvers, items.resolvers];
 
-const typeDefs = [typeDef, itemCategories.typeDef];
+const typeDefs = [typeDef, itemCategories.typeDef, items.typeDef];
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
