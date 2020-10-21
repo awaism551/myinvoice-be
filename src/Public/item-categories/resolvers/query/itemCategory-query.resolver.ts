@@ -7,6 +7,5 @@ export let itemCategoryQueryResolver = async (
   context: any,
   info: any,
 ) => {
-  console.log('getItemCategory::resolver fun::', args);
   return itemCategoriesService.getItemCategory(args.itemCategoryId);
 };
