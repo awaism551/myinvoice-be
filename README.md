@@ -1,1 +1,0 @@
-New Express with ts configuration project created as a backend of myinvoice project, so that my tech stack will remain same as that of my professional office "omni central project", it will help as a practise of my that project as well. backend repo will remain, previous nestjs-firebase code will be replaced with this
