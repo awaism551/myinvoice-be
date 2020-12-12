@@ -25,10 +25,12 @@ export interface IMutation {
 export interface ItemCategory {
     id: string;
     title: string;
+    items?: Item[];
 }
 
 export interface Item {
     id: string;
     name: string;
     price: number;
+    category: ItemCategory;
 }

@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Item } from 'src/items/items.model';
 
 @Table
 export class Category extends Model {
@@ -13,4 +14,7 @@ export class Category extends Model {
 
   @Column
   title: string;
+
+  @HasMany(() => Item)
+  items: Item[];
 }

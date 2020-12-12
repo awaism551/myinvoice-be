@@ -10,4 +10,5 @@ type Mutation {
 type ItemCategory {
   id: ID!
   title: String!
+  items: [Item!]
 }

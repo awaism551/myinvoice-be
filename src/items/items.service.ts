@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { Category } from 'src/categories/categories.model';
 import { Item } from './items.model';
 
 @Injectable()
 export class ItemsService {
   async getItems() {
     try {
-      return await Item.findAll();
+      return await Item.findAll({
+        include: Category,
+      });
     } catch (error) {
       console.log('error', error);
     }
@@ -13,7 +16,12 @@ export class ItemsService {
 
   async getItem(id: number) {
     try {
-      return await Item.findByPk(id);
+      return await Item.findOne({
+        where: {
+          id,
+        },
+        include: Category,
+      });
     } catch (error) {
       console.log('error', error);
     }
