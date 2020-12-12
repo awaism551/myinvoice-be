@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
+import { Item } from './items/items.model';
+import { ItemsModule } from './items/items.module';
 
 const dbConnection: SequelizeModuleOptions = {
   dialect: 'mysql',
@@ -14,7 +16,7 @@ const dbConnection: SequelizeModuleOptions = {
   username: 'root',
   password: '',
   database: 'myinvoice',
-  models: [Category],
+  models: [Category, Item],
 };
 
 @Module({
@@ -27,6 +29,7 @@ const dbConnection: SequelizeModuleOptions = {
       },
     }),
     CategoriesModule,
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

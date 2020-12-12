@@ -1,5 +1,5 @@
 type Query {
-  itemCategories: [ItemCategory]
+  itemCategories: [ItemCategory!]
   itemCategory(itemCategoryId: ID!): ItemCategory
 }
 type Mutation {
