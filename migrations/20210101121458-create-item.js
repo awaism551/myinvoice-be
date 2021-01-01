@@ -16,15 +16,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      categoryId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        // foreignKey: true,
-        // references: {
-        //   model: 'Category',
-        //   key: 'id',
-        // },
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
