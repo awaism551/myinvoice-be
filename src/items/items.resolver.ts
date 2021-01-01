@@ -19,19 +19,28 @@ export class ItemResolver {
   }
 
   @Mutation('createItem')
-  async create(@Args('name') name: string, @Args('price') price: number) {
-    const createdItem = await this.itemService.createItem(name, price);
-    return createdItem;
+  async create(
+    @Args('name') name: string,
+    @Args('price') price: number,
+    @Args('categoryId') categoryId: number,
+  ) {
+    return await this.itemService.createItem(name, price, categoryId);
   }
 
   @Mutation('updateItem')
   async update(
     @Args('itemId', ParseIntPipe) id: number,
-    @Args('name') name: string,
-    @Args('price') price: number,
+    @Args('name') name?: string,
+    @Args('price') price?: number,
+    @Args('categoryId') categoryId?: string,
   ) {
-    const updatedItem = await this.itemService.updateItem(id, name, price);
-    return updatedItem;
+    if (!name && !price && !categoryId) {
+      throw new Error(
+        'Please provide one of the following fields:Name, Price, Category',
+      );
+    } else {
+      return await this.itemService.updateItem(id, name, price, categoryId);
+    }
   }
 
   @Mutation('deleteItem')

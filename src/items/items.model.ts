@@ -26,7 +26,9 @@ export class Item extends Model {
   price: number;
 
   @ForeignKey(() => Category)
-  @Column
+  @Column({
+    allowNull: false,
+  })
   categoryId: number;
 
   @BelongsTo(() => Category)

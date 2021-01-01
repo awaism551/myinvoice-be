@@ -27,14 +27,22 @@ export class ItemsService {
     }
   }
 
-  async createItem(name: string, price: number) {
-    return await Item.create({ name, price });
+  async createItem(name: string, price: number, categoryId: number) {
+    return await Item.create({ name, price, categoryId });
   }
 
-  async updateItem(id: number, name: string, price: number) {
+  async updateItem(
+    id: number,
+    name?: string,
+    price?: number,
+    categoryId?: string,
+  ) {
     let result;
     try {
-      result = await Item.update({ name, price }, { where: { id } });
+      result = await Item.update(
+        { name, price, categoryId },
+        { where: { id } },
+      );
       if (result[0] === 1) {
         return await Item.findByPk(id);
       }
