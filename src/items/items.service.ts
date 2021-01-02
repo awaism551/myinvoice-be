@@ -44,7 +44,12 @@ export class ItemsService {
         { where: { id } },
       );
       if (result[0] === 1) {
-        return await Item.findByPk(id);
+        return await Item.findOne({
+          where: {
+            id,
+          },
+          include: Category,
+        });
       }
     } catch (error) {
       console.log('error update::', error);
