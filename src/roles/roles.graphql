@@ -1,0 +1,8 @@
+type Query {
+  getRoles: [Role!]
+}
+
+type Role {
+  id: ID!
+  name: String!
+}

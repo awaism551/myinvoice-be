@@ -11,6 +11,7 @@ export interface IQuery {
     itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;
     items(): Item[] | Promise<Item[]>;
     item(itemId: string): Item | Promise<Item>;
+    getRoles(): Role[] | Promise<Role[]>;
 }
 
 export interface IMutation {
@@ -33,4 +34,9 @@ export interface Item {
     name: string;
     price: number;
     category: ItemCategory;
+}
+
+export interface Role {
+    id: string;
+    name: string;
 }

@@ -8,6 +8,7 @@ import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
 import { Item } from './items/items.model';
 import { ItemsModule } from './items/items.module';
+import { RolesModule } from './roles/roles.module';
 
 const dbConnection: SequelizeModuleOptions = {
   dialect: 'mysql',
@@ -30,6 +31,7 @@ const dbConnection: SequelizeModuleOptions = {
     }),
     CategoriesModule,
     ItemsModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
