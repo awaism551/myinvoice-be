@@ -28,7 +28,13 @@ export class ItemsService {
   }
 
   async createItem(name: string, price: number, categoryId: number) {
-    return await Item.create({ name, price, categoryId });
+    let createdItem = await Item.create({ name, price, categoryId });
+    return await Item.findOne({
+      where: {
+        id: createdItem.id,
+      },
+      include: Category,
+    });
   }
 
   async updateItem(
@@ -37,13 +43,13 @@ export class ItemsService {
     price?: number,
     categoryId?: string,
   ) {
-    let result;
+    let affectedRows;
     try {
-      result = await Item.update(
+      affectedRows = await Item.update(
         { name, price, categoryId },
         { where: { id } },
       );
-      if (result[0] === 1) {
+      if (affectedRows[0] === 1) {
         return await Item.findOne({
           where: {
             id,
