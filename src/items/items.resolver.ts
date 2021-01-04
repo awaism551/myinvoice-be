@@ -1,9 +1,9 @@
 import { ParseIntPipe } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ItemsService } from './items.service';
+import { ItemService } from './items.service';
 @Resolver('Item')
 export class ItemResolver {
-  constructor(private itemService: ItemsService) {}
+  constructor(private itemService: ItemService) {}
 
   @Query('items')
   async getItems() {

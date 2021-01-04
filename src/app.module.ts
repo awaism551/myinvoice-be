@@ -8,7 +8,10 @@ import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
 import { Item } from './items/items.model';
 import { ItemsModule } from './items/items.module';
+import { Role } from './roles/roles.model';
 import { RolesModule } from './roles/roles.module';
+import { User } from './users/users.model';
+import { UsersModule } from './users/users.module';
 
 const dbConnection: SequelizeModuleOptions = {
   dialect: 'mysql',
@@ -17,7 +20,7 @@ const dbConnection: SequelizeModuleOptions = {
   username: 'root',
   password: '',
   database: 'myinvoice',
-  models: [Category, Item],
+  models: [Category, Item, Role, User],
 };
 
 @Module({
@@ -32,6 +35,7 @@ const dbConnection: SequelizeModuleOptions = {
     CategoriesModule,
     ItemsModule,
     RolesModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

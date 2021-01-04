@@ -3,7 +3,7 @@ import { Category } from 'src/categories/categories.model';
 import { Item } from './items.model';
 
 @Injectable()
-export class ItemsService {
+export class ItemService {
   async getItems() {
     try {
       return await Item.findAll({

@@ -11,7 +11,9 @@ export interface IQuery {
     itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;
     items(): Item[] | Promise<Item[]>;
     item(itemId: string): Item | Promise<Item>;
-    getRoles(): Role[] | Promise<Role[]>;
+    roles(): Role[] | Promise<Role[]>;
+    users(): User[] | Promise<User[]>;
+    user(userId: string): User | Promise<User>;
 }
 
 export interface IMutation {
@@ -21,6 +23,9 @@ export interface IMutation {
     createItem(name: string, price: number, categoryId: string): Item | Promise<Item>;
     updateItem(itemId: string, name?: string, price?: number, categoryId?: string): Item | Promise<Item>;
     deleteItem(itemId: string): boolean | Promise<boolean>;
+    createUser(name: string, email: string, roleId: string): User | Promise<User>;
+    updateUser(userId: string, name?: string, roleId?: string): User | Promise<User>;
+    deleteUser(userId: string): boolean | Promise<boolean>;
 }
 
 export interface ItemCategory {
@@ -39,4 +44,11 @@ export interface Item {
 export interface Role {
     id: string;
     name: string;
+}
+
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+    role: Role;
 }

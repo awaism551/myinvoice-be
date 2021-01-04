@@ -5,7 +5,7 @@ import { RoleService } from './roles.service';
 export class RoleResolver {
   constructor(private roleService: RoleService) {}
 
-  @Query('getRoles')
+  @Query('roles')
   async getRoles() {
     return await this.roleService.getRoles();
   }
