@@ -1,16 +1,19 @@
-import { ParseIntPipe } from '@nestjs/common';
+import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { LoginGuard } from 'src/auth/jwt-auth.guard';
 import { ItemService } from './items.service';
 @Resolver('Item')
 export class ItemResolver {
   constructor(private itemService: ItemService) {}
 
   @Query('items')
+  @UseGuards(LoginGuard)
   async getItems() {
     return await this.itemService.getItems();
   }
 
   @Query('item')
+  @UseGuards(LoginGuard)
   async getItem(
     @Args('itemId', ParseIntPipe)
     id: number,
@@ -19,6 +22,7 @@ export class ItemResolver {
   }
 
   @Mutation('createItem')
+  @UseGuards(LoginGuard)
   async create(
     @Args('name') name: string,
     @Args('price') price: number,
@@ -28,6 +32,7 @@ export class ItemResolver {
   }
 
   @Mutation('updateItem')
+  @UseGuards(LoginGuard)
   async update(
     @Args('itemId', ParseIntPipe) id: number,
     @Args('name') name?: string,
@@ -44,6 +49,7 @@ export class ItemResolver {
   }
 
   @Mutation('deleteItem')
+  @UseGuards(LoginGuard)
   async delete(@Args('itemId', ParseIntPipe) id: number) {
     return await this.itemService.deleteItem(id);
   }

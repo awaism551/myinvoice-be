@@ -1,0 +1,13 @@
+# type TestUser {
+#   userId: ID!
+#   username: String!
+#   password: String!
+# }
+
+type Token {
+  access_token: String!
+}
+
+type Mutation {
+  login(username: String!, password: String!): Token
+}

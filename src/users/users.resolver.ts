@@ -1,5 +1,6 @@
-import { ParseIntPipe } from '@nestjs/common';
+import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { LoginGuard } from 'src/auth/jwt-auth.guard';
 import { UserService } from './users.service';
 
 @Resolver('User')
@@ -7,11 +8,13 @@ export class UserResolver {
   constructor(private userService: UserService) {}
 
   @Query('users')
+  @UseGuards(LoginGuard)
   async getUsers() {
     return await this.userService.getUsers();
   }
 
   @Query('user')
+  @UseGuards(LoginGuard)
   async getUser(
     @Args('userId', ParseIntPipe)
     id: number,
@@ -20,6 +23,7 @@ export class UserResolver {
   }
 
   @Mutation('createUser')
+  @UseGuards(LoginGuard)
   async create(
     @Args('name') name: string,
     @Args('email') email: string,
@@ -29,6 +33,7 @@ export class UserResolver {
   }
 
   @Mutation('updateUser')
+  @UseGuards(LoginGuard)
   async update(
     @Args('userId', ParseIntPipe) id: string,
     @Args('name') name?: string,
@@ -42,6 +47,7 @@ export class UserResolver {
   }
 
   @Mutation('deleteUser')
+  @UseGuards(LoginGuard)
   async delete(@Args('userId', ParseIntPipe) id: string) {
     return await this.userService.deleteUser(id);
   }
