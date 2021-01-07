@@ -19,7 +19,7 @@ export class UserResolver {
     @Args('userId', ParseIntPipe)
     id: number,
   ) {
-    return await this.userService.getUser(id);
+    return await this.userService.getUserById(id);
   }
 
   @Mutation('createUser')
@@ -27,9 +27,11 @@ export class UserResolver {
   async create(
     @Args('name') name: string,
     @Args('email') email: string,
+    @Args('password') password: string,
     @Args('roleId') roleId: string,
   ) {
-    return await this.userService.createUser(name, email, roleId);
+    // handle password confirm logic on the frontend side
+    return await this.userService.createUser(name, email, password, roleId);
   }
 
   @Mutation('updateUser')
@@ -37,12 +39,15 @@ export class UserResolver {
   async update(
     @Args('userId', ParseIntPipe) id: string,
     @Args('name') name?: string,
+    @Args('password') password?: string,
     @Args('roleId') roleId?: string,
   ) {
-    if (!name && !roleId) {
-      throw new Error('Please provide one of the following fields:Name, Role');
+    if (!name && !roleId && !password) {
+      throw new Error(
+        'Please provide one of the following fields:Name, Role, Password',
+      );
     } else {
-      return await this.userService.updateUser(id, name, roleId);
+      return await this.userService.updateUser(id, name, password, roleId);
     }
   }
 

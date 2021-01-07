@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 import { UserService } from '../users/users.service';
 
 @Injectable()
@@ -9,15 +10,17 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
-    // console.log('auth service::validateUser::user::', user);
-
-    if (user && user.password === pass) {
-      const { password, ...result } = user; // es6 syntax to remove property from object
-      return result;
+  async validateUserFromDb(username: string, password: string): Promise<any> {
+    const user = await this.usersService.getUserByEmail(username);
+    console.log('auth service::validateUser::user::', user.password);
+    if (user) {
+      let result = bcrypt.compareSync(password, user.password);
+      return result ? user : null;
+    } else {
+      return null;
     }
-    return null;
+
+    return user ? user : null;
   }
 
   async login(user: any) {

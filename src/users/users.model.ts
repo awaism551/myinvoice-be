@@ -22,8 +22,13 @@ export class User extends Model {
   @Column
   name: string;
 
-  @Column
+  @Column({
+    unique: true,
+  })
   email: string;
+
+  @Column
+  password: string;
 
   @ForeignKey(() => Role)
   @Column({
