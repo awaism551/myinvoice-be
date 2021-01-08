@@ -45,6 +45,7 @@ export interface Item {
 export interface LoginSuccessResponse {
     userId: string;
     name: string;
+    role: Role;
     access_token: string;
 }
 

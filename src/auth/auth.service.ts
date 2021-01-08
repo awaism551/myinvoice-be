@@ -34,6 +34,7 @@ export class AuthService {
     return {
       userId: this.user.id.toString(),
       name: this.user.name,
+      role: this.user.role,
       access_token: this.jwtService.sign(user),
     };
     // console.log('authservice::login::returnObj', returnObj);

@@ -7,6 +7,7 @@
 type LoginSuccessResponse {
   userId: ID!
   name: String!
+  role: Role!
   access_token: String!
 }
 

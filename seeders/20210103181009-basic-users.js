@@ -9,7 +9,7 @@ module.exports = {
 
     return queryInterface.bulkInsert('Users', [
       {
-        name: 'Awais Admin',
+        name: 'Awais ',
         email: 'awaism551@gmail.com',
         password: hashedPassword,
         roleId: 1,
@@ -17,7 +17,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Awais Manager',
+        name: 'Tahir ',
         email: 'awaismanager@mailinator.com',
         password: hashedPassword,
         roleId: 2,
@@ -25,7 +25,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Awais Sales',
+        name: 'Bilal ',
         email: 'awaissales@mailinator.com',
         password: hashedPassword,
         roleId: 3,
