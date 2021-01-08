@@ -23,7 +23,7 @@ export interface IMutation {
     createItem(name: string, price: number, categoryId: string): Item | Promise<Item>;
     updateItem(itemId: string, name?: string, price?: number, categoryId?: string): Item | Promise<Item>;
     deleteItem(itemId: string): boolean | Promise<boolean>;
-    login(username: string, password: string): Token | Promise<Token>;
+    login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;
     createUser(name: string, email: string, password: string, roleId: string): User | Promise<User>;
     updateUser(userId: string, name?: string, password?: string, roleId?: string): User | Promise<User>;
     deleteUser(userId: string): boolean | Promise<boolean>;
@@ -42,7 +42,9 @@ export interface Item {
     category: ItemCategory;
 }
 
-export interface Token {
+export interface LoginSuccessResponse {
+    userId: string;
+    name: string;
     access_token: string;
 }
 
