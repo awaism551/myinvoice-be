@@ -11,14 +11,14 @@ export class CategoryResolver {
 
   @Query('itemCategories')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Sales, enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.sales, enumRoles.manager, enumRoles.admin)
   async getCategories() {
     return await this.categoryService.getItemCategories();
   }
 
   @Query('itemCategory')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Sales, enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.sales, enumRoles.manager, enumRoles.admin)
   async getCategory(
     @Args('itemCategoryId', ParseIntPipe)
     id: number,
@@ -28,7 +28,7 @@ export class CategoryResolver {
 
   @Mutation('createItemCategory')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.manager, enumRoles.admin)
   async create(@Args('title') title: string) {
     const createdCategory = await this.categoryService.createItemCategory(
       title,
@@ -38,7 +38,7 @@ export class CategoryResolver {
 
   @Mutation('updateItemCategory')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.manager, enumRoles.admin)
   async update(
     @Args('itemCategoryId', ParseIntPipe) id: number,
     @Args('title') title: string,
@@ -52,7 +52,7 @@ export class CategoryResolver {
 
   @Mutation('deleteItemCategory')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.manager, enumRoles.admin)
   async delete(@Args('itemCategoryId', ParseIntPipe) id: number) {
     return await this.categoryService.deleteItemCategory(id);
   }

@@ -7,9 +7,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export enum enumRoles {
-    Admin = "Admin",
-    Manager = "Manager",
-    Sales = "Sales"
+    admin = "admin",
+    manager = "manager",
+    sales = "sales"
 }
 
 export interface IQuery {

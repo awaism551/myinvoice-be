@@ -10,14 +10,14 @@ export class ItemResolver {
 
   @Query('items')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Sales, enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.sales, enumRoles.manager, enumRoles.admin)
   async getItems() {
     return await this.itemService.getItems();
   }
 
   @Query('item')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Sales, enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.sales, enumRoles.manager, enumRoles.admin)
   async getItem(
     @Args('itemId', ParseIntPipe)
     id: number,
@@ -27,7 +27,7 @@ export class ItemResolver {
 
   @Mutation('createItem')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.manager, enumRoles.admin)
   async create(
     @Args('name') name: string,
     @Args('price') price: number,
@@ -38,7 +38,7 @@ export class ItemResolver {
 
   @Mutation('updateItem')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.manager, enumRoles.admin)
   async update(
     @Args('itemId', ParseIntPipe) id: number,
     @Args('name') name?: string,
@@ -56,7 +56,7 @@ export class ItemResolver {
 
   @Mutation('deleteItem')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.manager, enumRoles.admin)
   async delete(@Args('itemId', ParseIntPipe) id: number) {
     return await this.itemService.deleteItem(id);
   }

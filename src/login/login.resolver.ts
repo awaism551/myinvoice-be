@@ -10,7 +10,7 @@ export class LoginResolver {
 
   @UseGuards(LocalAuthGuard)
   @Mutation('login')
-  @Roles(enumRoles.Sales, enumRoles.Manager, enumRoles.Admin)
+  @Roles(enumRoles.sales, enumRoles.manager, enumRoles.admin)
   async login(@Body() user: LoginRequest) {
     // console.log('login resolver::login fun::user', user);
     if (user) {

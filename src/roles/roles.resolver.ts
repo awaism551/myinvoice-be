@@ -11,7 +11,7 @@ export class RoleResolver {
 
   @Query('roles')
   @UseGuards(LoginGuard)
-  @Roles(enumRoles.Admin)
+  @Roles(enumRoles.admin)
   async getRoles() {
     // this user is coming from jwt.strategy.ts::validate function
     // console.log('roles resolver::getRoles fun::user', user.name);
