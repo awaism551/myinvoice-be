@@ -2,12 +2,15 @@ import { Body, UseGuards } from '@nestjs/common';
 import { Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService, LoginRequest } from 'src/auth/auth.service';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { Roles } from 'src/roles/roles.decorator';
+import { Role } from 'src/roles/roles.enum';
 @Resolver('Login')
 export class LoginResolver {
   constructor(private authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
   @Mutation('login')
+  @Roles(Role.Sales, Role.Manager, Role.Admin)
   async login(@Body() user: LoginRequest) {
     // console.log('login resolver::login fun::user', user);
     if (user) {

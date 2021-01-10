@@ -11,7 +11,7 @@ export class UserResolver {
 
   @Query('users')
   @UseGuards(LoginGuard)
-  @Roles(Role.Manager)
+  @Roles(Role.Admin)
   async getUsers() {
     return await this.userService.getUsers();
   }
@@ -28,6 +28,7 @@ export class UserResolver {
 
   @Mutation('createUser')
   @UseGuards(LoginGuard)
+  @Roles(Role.Admin)
   async create(
     @Args('name') name: string,
     @Args('email') email: string,
@@ -40,6 +41,7 @@ export class UserResolver {
 
   @Mutation('updateUser')
   @UseGuards(LoginGuard)
+  @Roles(Role.Admin)
   async update(
     @Args('userId', ParseIntPipe) id: string,
     @Args('name') name?: string,
@@ -57,6 +59,7 @@ export class UserResolver {
 
   @Mutation('deleteUser')
   @UseGuards(LoginGuard)
+  @Roles(Role.Admin)
   async delete(@Args('userId', ParseIntPipe) id: string) {
     return await this.userService.deleteUser(id);
   }

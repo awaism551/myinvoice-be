@@ -1,6 +1,8 @@
 import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { LoginGuard } from 'src/auth/jwt-auth.guard';
+import { Roles } from 'src/roles/roles.decorator';
+import { Role } from 'src/roles/roles.enum';
 import { ItemService } from './items.service';
 @Resolver('Item')
 export class ItemResolver {
@@ -8,12 +10,14 @@ export class ItemResolver {
 
   @Query('items')
   @UseGuards(LoginGuard)
+  @Roles(Role.Sales, Role.Manager, Role.Admin)
   async getItems() {
     return await this.itemService.getItems();
   }
 
   @Query('item')
   @UseGuards(LoginGuard)
+  @Roles(Role.Sales, Role.Manager, Role.Admin)
   async getItem(
     @Args('itemId', ParseIntPipe)
     id: number,
@@ -23,6 +27,7 @@ export class ItemResolver {
 
   @Mutation('createItem')
   @UseGuards(LoginGuard)
+  @Roles(Role.Manager, Role.Admin)
   async create(
     @Args('name') name: string,
     @Args('price') price: number,
@@ -33,6 +38,7 @@ export class ItemResolver {
 
   @Mutation('updateItem')
   @UseGuards(LoginGuard)
+  @Roles(Role.Manager, Role.Admin)
   async update(
     @Args('itemId', ParseIntPipe) id: number,
     @Args('name') name?: string,
@@ -50,6 +56,7 @@ export class ItemResolver {
 
   @Mutation('deleteItem')
   @UseGuards(LoginGuard)
+  @Roles(Role.Manager, Role.Admin)
   async delete(@Args('itemId', ParseIntPipe) id: number) {
     return await this.itemService.deleteItem(id);
   }
