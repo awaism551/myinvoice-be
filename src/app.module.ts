@@ -1,19 +1,21 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql/dist/graphql.module';
 import { SequelizeModule, SequelizeModuleOptions } from '@nestjs/sequelize';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
 import { Item } from './items/items.model';
 import { ItemsModule } from './items/items.module';
+import { LoginModule } from './login/login.module';
+import { RolesGuard } from './roles/roles.guard';
 import { Role } from './roles/roles.model';
 import { RolesModule } from './roles/roles.module';
 import { User } from './users/users.model';
 import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { LoginModule } from './login/login.module';
 
 const dbConnection: SequelizeModuleOptions = {
   dialect: 'mysql',
@@ -42,6 +44,12 @@ const dbConnection: SequelizeModuleOptions = {
     LoginModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {}

@@ -1,6 +1,8 @@
 import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { LoginGuard } from 'src/auth/jwt-auth.guard';
+import { Roles } from 'src/roles/roles.decorator';
+import { Role } from 'src/roles/roles.enum';
 import { UserService } from './users.service';
 
 @Resolver('User')
@@ -9,12 +11,14 @@ export class UserResolver {
 
   @Query('users')
   @UseGuards(LoginGuard)
+  @Roles(Role.Manager)
   async getUsers() {
     return await this.userService.getUsers();
   }
 
   @Query('user')
   @UseGuards(LoginGuard)
+  @Roles(Role.Admin)
   async getUser(
     @Args('userId', ParseIntPipe)
     id: number,
