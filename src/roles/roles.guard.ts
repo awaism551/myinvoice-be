@@ -16,8 +16,15 @@ export class RolesGuard implements CanActivate {
     if (!requiredRoles) {
       return true;
     }
+    // console.log('roles guard::requiredRoles::', requiredRoles);
+
     const ctx = GqlExecutionContext.create(context);
     const user = ctx.getContext().req.user;
+    // console.log(user?.role?.name);
+    if (!user) {
+      // it means user is trying to login
+      return true;
+    }
     // below line logic is applicable if one user can have multiple roles
     // return requiredRoles.some((role) => user?.roles?.includes(role));
     // below logic if one user can have only one role which is in our case
