@@ -6,6 +6,12 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum enumRoles {
+    Admin = "Admin",
+    Manager = "Manager",
+    Sales = "Sales"
+}
+
 export interface IQuery {
     itemCategories(): ItemCategory[] | Promise<ItemCategory[]>;
     itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;

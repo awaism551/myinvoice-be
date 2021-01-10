@@ -6,3 +6,9 @@ type Role {
   id: ID!
   name: String!
 }
+
+enum enumRoles {
+  Admin
+  Manager
+  Sales
+}
