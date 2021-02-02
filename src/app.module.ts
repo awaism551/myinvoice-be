@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql/dist/graphql.module';
 import { SequelizeModule, SequelizeModuleOptions } from '@nestjs/sequelize';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -42,6 +43,9 @@ const dbConnection: SequelizeModuleOptions = {
     UsersModule,
     AuthModule,
     LoginModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'front'),
+    }),
   ],
   controllers: [AppController],
   providers: [
