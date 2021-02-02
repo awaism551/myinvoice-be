@@ -1,90 +1,69 @@
-export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-/** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
-};
 
-export type Query = {
-  __typename?: 'Query';
-  itemCategories?: Maybe<Array<Maybe<ItemCategory>>>;
-  itemCategory?: Maybe<ItemCategory>;
-  items?: Maybe<Array<Maybe<Item>>>;
-  item?: Maybe<Item>;
-};
+/** ------------------------------------------------------
+ * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+ * -------------------------------------------------------
+ */
 
-
-export type QueryItemCategoryArgs = {
-  itemCategoryId: Scalars['ID'];
-};
-
-
-export type QueryItemArgs = {
-  itemId: Scalars['ID'];
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  createItemCategory?: Maybe<ItemCategory>;
-  updateItemCategory?: Maybe<ItemCategory>;
-  deleteItemCategory?: Maybe<Scalars['Boolean']>;
-  createItem?: Maybe<Item>;
-  updateItem?: Maybe<Item>;
-  deleteItem?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationCreateItemCategoryArgs = {
-  title: Scalars['String'];
-};
-
-
-export type MutationUpdateItemCategoryArgs = {
-  itemCategoryId: Scalars['ID'];
-  title: Scalars['String'];
-};
-
-
-export type MutationDeleteItemCategoryArgs = {
-  itemCategoryId: Scalars['ID'];
-};
-
-
-export type MutationCreateItemArgs = {
-  name: Scalars['String'];
-};
-
-
-export type MutationUpdateItemArgs = {
-  itemId: Scalars['ID'];
-  name: Scalars['String'];
-};
-
-
-export type MutationDeleteItemArgs = {
-  itemId: Scalars['ID'];
-};
-
-export type ItemCategory = {
-  __typename?: 'ItemCategory';
-  id: Scalars['ID'];
-  title: Scalars['String'];
-};
-
-export type Item = {
-  __typename?: 'Item';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-};
-
-export enum CacheControlScope {
-  Public = 'PUBLIC',
-  Private = 'PRIVATE'
+/* tslint:disable */
+/* eslint-disable */
+export enum enumRoles {
+    admin = "admin",
+    manager = "manager",
+    sales = "sales"
 }
 
+export interface IQuery {
+    itemCategories(): ItemCategory[] | Promise<ItemCategory[]>;
+    itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;
+    items(): Item[] | Promise<Item[]>;
+    item(itemId: string): Item | Promise<Item>;
+    roles(): Role[] | Promise<Role[]>;
+    users(): User[] | Promise<User[]>;
+    user(userId: string): User | Promise<User>;
+}
+
+export interface IMutation {
+    createItemCategory(title: string): ItemCategory | Promise<ItemCategory>;
+    updateItemCategory(itemCategoryId: string, title: string): ItemCategory | Promise<ItemCategory>;
+    deleteItemCategory(itemCategoryId: string): boolean | Promise<boolean>;
+    createItem(name: string, price: number, categoryId: string): Item | Promise<Item>;
+    updateItem(itemId: string, name?: string, price?: number, categoryId?: string): Item | Promise<Item>;
+    deleteItem(itemId: string): boolean | Promise<boolean>;
+    login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;
+    createUser(name: string, email: string, password: string, roleId: string): User | Promise<User>;
+    updateUser(userId: string, name?: string, password?: string, roleId?: string): User | Promise<User>;
+    deleteUser(userId: string): boolean | Promise<boolean>;
+}
+
+export interface ItemCategory {
+    id: string;
+    title: string;
+    items?: Item[];
+}
+
+export interface Item {
+    id: string;
+    name: string;
+    price: number;
+    category: ItemCategory;
+}
+
+export interface LoginSuccessResponse {
+    userId: string;
+    name: string;
+    role: Role;
+    access_token: string;
+}
+
+export interface Role {
+    id: string;
+    name: string;
+}
+
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    role: Role;
+}

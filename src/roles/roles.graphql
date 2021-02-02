@@ -1,0 +1,14 @@
+type Query {
+  roles: [Role!]
+}
+
+type Role {
+  id: ID!
+  name: String!
+}
+
+enum enumRoles {
+  admin
+  manager
+  sales
+}

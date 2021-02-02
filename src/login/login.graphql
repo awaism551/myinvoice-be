@@ -1,0 +1,16 @@
+# type TestUser {
+#   userId: ID!
+#   username: String!
+#   password: String!
+# }
+
+type LoginSuccessResponse {
+  userId: ID!
+  name: String!
+  role: Role!
+  access_token: String!
+}
+
+type Mutation {
+  login(username: String!, password: String!): LoginSuccessResponse
+}

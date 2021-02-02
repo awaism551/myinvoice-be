@@ -1,0 +1,14 @@
+type Query {
+  itemCategories: [ItemCategory!]
+  itemCategory(itemCategoryId: ID!): ItemCategory
+}
+type Mutation {
+  createItemCategory(title: String!): ItemCategory
+  updateItemCategory(itemCategoryId: ID!, title: String!): ItemCategory
+  deleteItemCategory(itemCategoryId: ID!): Boolean
+}
+type ItemCategory {
+  id: ID!
+  title: String!
+  items: [Item!]
+}
