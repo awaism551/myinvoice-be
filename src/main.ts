@@ -9,4 +9,3 @@ async function bootstrap() {
   await app.listen(server_port, server_host);
 }
 bootstrap();
-// test
