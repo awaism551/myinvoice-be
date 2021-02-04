@@ -8,6 +8,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get('SERVER_PORT');
   var server_host = '0.0.0.0';
-  await app.listen(port, server_host);
+  await app.listen(process.env.PORT || port, server_host);
 }
 bootstrap();
