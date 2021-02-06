@@ -5,6 +5,8 @@ import { GraphQLModule } from '@nestjs/graphql/dist/graphql.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
+import { Balance } from './balances/balances.model';
+import { BalancesModule } from './balances/balances.module';
 import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
 import { Customer } from './customers/customers.model';
@@ -46,6 +48,7 @@ import { VendorsModule } from './vendors/vendors.module';
           PaymentMode,
           OrderStatus,
           Unit,
+          Balance,
         ],
       }),
       inject: [ConfigService],
@@ -74,6 +77,7 @@ import { VendorsModule } from './vendors/vendors.module';
     PaymentModesModule,
     OrderStatusesModule,
     UnitsModule,
+    BalancesModule,
   ],
   providers: [
     {

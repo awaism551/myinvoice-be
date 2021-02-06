@@ -13,6 +13,7 @@ export enum enumRoles {
 }
 
 export interface IQuery {
+    balances(): Balance[] | Promise<Balance[]>;
     itemCategories(): ItemCategory[] | Promise<ItemCategory[]>;
     itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;
     customers(): Customer[] | Promise<Customer[]>;
@@ -25,6 +26,12 @@ export interface IQuery {
     users(): User[] | Promise<User[]>;
     user(userId: string): User | Promise<User>;
     vendors(): Vendor[] | Promise<Vendor[]>;
+}
+
+export interface Balance {
+    id: string;
+    amount: number;
+    customer: Customer;
 }
 
 export interface IMutation {

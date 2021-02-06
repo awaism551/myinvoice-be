@@ -1,0 +1,9 @@
+type Query {
+  balances: [Balance!]
+}
+
+type Balance {
+  id: ID!
+  amount: Float!
+  customer: Customer!
+}
