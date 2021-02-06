@@ -1,0 +1,8 @@
+type Query {
+  vendors: [Vendor!]
+}
+
+type Vendor {
+  id: ID!
+  name: String!
+}

@@ -11,5 +11,10 @@ type Item {
   id: ID!
   name: String!
   price: Float!
+  discount: Float!
+  length: Float!
+  weight: Float!
+  stock: Float!
   category: ItemCategory!
+  vendor: Vendor!
 }

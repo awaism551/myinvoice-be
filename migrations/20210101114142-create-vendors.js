@@ -1,7 +1,9 @@
 'use strict';
+var tableName = 'Vendors';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Items', {
+    await queryInterface.createTable(tableName, {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,27 +13,6 @@ module.exports = {
       name: {
         allowNull: false,
         type: Sequelize.STRING,
-      },
-      price: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      discount: {
-        allowNull: true,
-        type: Sequelize.STRING,
-      },
-      length: {
-        allowNull: true,
-        type: Sequelize.STRING,
-      },
-      weight: {
-        allowNull: true,
-        type: Sequelize.STRING,
-      },
-      stock: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +25,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Items');
+    await queryInterface.dropTable(tableName);
   },
 };

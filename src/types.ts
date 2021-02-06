@@ -20,6 +20,7 @@ export interface IQuery {
     roles(): Role[] | Promise<Role[]>;
     users(): User[] | Promise<User[]>;
     user(userId: string): User | Promise<User>;
+    vendors(): Vendor[] | Promise<Vendor[]>;
 }
 
 export interface IMutation {
@@ -45,7 +46,12 @@ export interface Item {
     id: string;
     name: string;
     price: number;
+    discount: number;
+    length: number;
+    weight: number;
+    stock: number;
     category: ItemCategory;
+    vendor: Vendor;
 }
 
 export interface LoginSuccessResponse {
@@ -66,4 +72,9 @@ export interface User {
     email: string;
     password: string;
     role: Role;
+}
+
+export interface Vendor {
+    id: string;
+    name: string;
 }

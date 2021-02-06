@@ -1,9 +1,9 @@
 'use strict';
 
-var parentTable = 'Categories';
+var parentTable = 'Vendors';
 var parentTablePk = 'id';
 var childTable = 'Items';
-var childTableFk = 'categoryId';
+var childTableFk = 'vendorId';
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql/dist/graphql.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { Category } from './categories/categories.model';
@@ -16,17 +15,8 @@ import { Role } from './roles/roles.model';
 import { RolesModule } from './roles/roles.module';
 import { User } from './users/users.model';
 import { UsersModule } from './users/users.module';
-
-// const dbConnection: SequelizeModuleOptions = {
-//   dialect: 'mysql',
-//   host: process.env.host,
-//   port: (process.env.dbPort as unknown) as number,
-//   username: process.env.username,
-//   password: process.env.password,
-//   database: process.env.database,
-//   models: [Category, Item, Role, User],
-// };
-
+import { Vendor } from './vendors/vendors.model';
+import { VendorsModule } from './vendors/vendors.module';
 @Module({
   imports: [
     SequelizeModule.forRootAsync({
@@ -38,7 +28,7 @@ import { UsersModule } from './users/users.module';
         username: configService.get('USERNAME'),
         password: configService.get('PASSWORD'),
         database: configService.get('DATABASE'),
-        models: [Category, Item, Role, User],
+        models: [Category, Item, Role, User, Vendor],
       }),
       inject: [ConfigService],
     }),
@@ -54,13 +44,14 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AuthModule,
     LoginModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'front'),
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'front'),
+    // }),
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
     }),
+    VendorsModule,
   ],
   providers: [
     {

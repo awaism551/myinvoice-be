@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from 'src/categories/categories.model';
+import { Vendor } from 'src/vendors/vendors.model';
 import { Item } from './items.model';
 
 @Injectable()
 export class ItemService {
+  parentModelsArray = [Category, Vendor];
   async getItems() {
     try {
       return await Item.findAll({
-        include: Category,
+        include: this.parentModelsArray,
       });
     } catch (error) {
       console.log('error', error);
@@ -20,7 +22,7 @@ export class ItemService {
         where: {
           id,
         },
-        include: Category,
+        include: this.parentModelsArray,
       });
     } catch (error) {
       console.log('error', error);
@@ -33,7 +35,7 @@ export class ItemService {
       where: {
         id: createdItem.id,
       },
-      include: Category,
+      include: this.parentModelsArray,
     });
   }
 
@@ -54,7 +56,7 @@ export class ItemService {
           where: {
             id,
           },
-          include: Category,
+          include: this.parentModelsArray,
         });
       }
     } catch (error) {
