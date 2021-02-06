@@ -19,6 +19,8 @@ import { PaymentModesModule } from './paymentModes/paymentModes.module';
 import { RolesGuard } from './roles/roles.guard';
 import { Role } from './roles/roles.model';
 import { RolesModule } from './roles/roles.module';
+import { Unit } from './units/units.model';
+import { UnitsModule } from './units/units.module';
 import { User } from './users/users.model';
 import { UsersModule } from './users/users.module';
 import { Vendor } from './vendors/vendors.model';
@@ -43,6 +45,7 @@ import { VendorsModule } from './vendors/vendors.module';
           Customer,
           PaymentMode,
           OrderStatus,
+          Unit,
         ],
       }),
       inject: [ConfigService],
@@ -70,6 +73,7 @@ import { VendorsModule } from './vendors/vendors.module';
     CustomersModule,
     PaymentModesModule,
     OrderStatusesModule,
+    UnitsModule,
   ],
   providers: [
     {

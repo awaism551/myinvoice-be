@@ -7,7 +7,7 @@ import { PaymentModeService } from './paymentModes.service';
 export class PaymentModeResolver {
   constructor(private paymentModeService: PaymentModeService) {}
 
-  @Query('paymentmodes')
+  @Query('paymentModes')
   @UseGuards(LoginGuard)
   async getPaymentModes() {
     return await this.paymentModeService.getPaymentModes();

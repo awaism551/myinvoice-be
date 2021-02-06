@@ -1,0 +1,8 @@
+type Query {
+  units: [Unit!]
+}
+
+type Unit {
+  id: ID!
+  name: String!
+}

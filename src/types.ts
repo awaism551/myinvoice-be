@@ -19,8 +19,9 @@ export interface IQuery {
     items(): Item[] | Promise<Item[]>;
     item(itemId: string): Item | Promise<Item>;
     orderStatuses(): OrderStatus[] | Promise<OrderStatus[]>;
-    paymentmodes(): PaymentMode[] | Promise<PaymentMode[]>;
+    paymentModes(): PaymentMode[] | Promise<PaymentMode[]>;
     roles(): Role[] | Promise<Role[]>;
+    units(): Unit[] | Promise<Unit[]>;
     users(): User[] | Promise<User[]>;
     user(userId: string): User | Promise<User>;
     vendors(): Vendor[] | Promise<Vendor[]>;
@@ -83,6 +84,11 @@ export interface PaymentMode {
 }
 
 export interface Role {
+    id: string;
+    name: string;
+}
+
+export interface Unit {
     id: string;
     name: string;
 }
