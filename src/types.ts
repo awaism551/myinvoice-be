@@ -15,6 +15,7 @@ export enum enumRoles {
 export interface IQuery {
     itemCategories(): ItemCategory[] | Promise<ItemCategory[]>;
     itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;
+    customers(): Customer[] | Promise<Customer[]>;
     items(): Item[] | Promise<Item[]>;
     item(itemId: string): Item | Promise<Item>;
     roles(): Role[] | Promise<Role[]>;
@@ -40,6 +41,14 @@ export interface ItemCategory {
     id: string;
     title: string;
     items?: Item[];
+}
+
+export interface Customer {
+    id: string;
+    name: string;
+    phoneNo: number;
+    address: string;
+    city: string;
 }
 
 export interface Item {
