@@ -12,6 +12,8 @@ import { CustomersModule } from './customers/customers.module';
 import { Item } from './items/items.model';
 import { ItemsModule } from './items/items.module';
 import { LoginModule } from './login/login.module';
+import { PaymentMode } from './paymentModes/paymentModes.model';
+import { PaymentModesModule } from './paymentModes/paymentModes.module';
 import { RolesGuard } from './roles/roles.guard';
 import { Role } from './roles/roles.model';
 import { RolesModule } from './roles/roles.module';
@@ -30,7 +32,7 @@ import { VendorsModule } from './vendors/vendors.module';
         username: configService.get('USERNAME'),
         password: configService.get('PASSWORD'),
         database: configService.get('DATABASE'),
-        models: [Category, Item, Role, User, Vendor, Customer],
+        models: [Category, Item, Role, User, Vendor, Customer, PaymentMode],
       }),
       inject: [ConfigService],
     }),
@@ -55,6 +57,7 @@ import { VendorsModule } from './vendors/vendors.module';
     }),
     VendorsModule,
     CustomersModule,
+    PaymentModesModule,
   ],
   providers: [
     {

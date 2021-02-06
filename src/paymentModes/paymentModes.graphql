@@ -1,0 +1,8 @@
+type Query {
+  paymentmodes: [PaymentMode!]
+}
+
+type PaymentMode {
+  id: ID!
+  name: String!
+}
