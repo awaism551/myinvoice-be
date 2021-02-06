@@ -1,0 +1,8 @@
+type Query {
+  orderStatuses: [OrderStatus!]
+}
+
+type OrderStatus {
+  id: ID!
+  name: String!
+}
