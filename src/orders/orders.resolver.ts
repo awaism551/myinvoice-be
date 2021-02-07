@@ -9,7 +9,6 @@ export class OrderResolver {
   @Query('orders')
   @UseGuards(LoginGuard)
   async getOrders() {
-    console.log('orders resolver');
     return await this.orderService.getOrders();
   }
 }

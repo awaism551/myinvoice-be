@@ -1,6 +1,7 @@
 'use strict';
-
-var tableName = 'Items';
+// this tablename should be plural of respective model name, only with addition of 's'
+// unless tablename is explicitly overridden there
+var tableName = 'OrdersItems';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -11,48 +12,21 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      price: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      discount: {
-        allowNull: true,
-        type: Sequelize.STRING,
-      },
-      length: {
-        allowNull: true,
-        type: Sequelize.STRING,
-      },
-      weight: {
-        allowNull: true,
-        type: Sequelize.STRING,
-      },
-      stock: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        defaultValue: 0,
-      },
-      categoryId: {
+      orderId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0,
         references: {
-          model: 'Categories', // name of parent table
+          model: 'Orders', // name of parent table
           key: 'id', // key in parent table that we're referencing
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      vendorId: {
+      itemId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0,
         references: {
-          model: 'Vendors', // name of parent table
+          model: 'Items', // name of parent table
           key: 'id', // key in parent table that we're referencing
         },
         onUpdate: 'CASCADE',

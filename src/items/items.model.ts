@@ -1,5 +1,6 @@
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
@@ -7,6 +8,8 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Category } from 'src/categories/categories.model';
+import { Order } from 'src/orders/orders.model';
+import { OrderItem } from 'src/orders/orders_items.model';
 import { Vendor } from 'src/vendors/vendors.model';
 
 @Table
@@ -53,4 +56,7 @@ export class Item extends Model {
   vendorId: number;
   @BelongsTo(() => Vendor)
   vendor: Vendor;
+
+  @BelongsToMany(() => Order, () => OrderItem)
+  orders: Order[];
 }

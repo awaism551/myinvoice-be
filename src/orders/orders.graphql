@@ -11,4 +11,5 @@ type Order {
   user: User!
   status: OrderStatus!
   paymentMode: PaymentMode
+  items: [Item!]!
 }

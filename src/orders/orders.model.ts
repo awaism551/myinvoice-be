@@ -1,5 +1,6 @@
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
@@ -7,9 +8,11 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Customer } from 'src/customers/customers.model';
+import { Item } from 'src/items/items.model';
 import { OrderStatus } from 'src/orderStatuses/orderStatuses.model';
 import { PaymentMode } from 'src/paymentModes/paymentModes.model';
 import { User } from 'src/users/users.model';
+import { OrderItem } from './orders_items.model';
 
 @Table
 export class Order extends Model {
@@ -53,7 +56,7 @@ export class Order extends Model {
   })
   orderStatusId: number;
   @BelongsTo(() => OrderStatus)
-  status: OrderStatus; 
+  status: OrderStatus;
   // this value i.e "status" should be matching with value present in respective graphql type i.e "Order"
   // this "status" is name of relationship present between these two entities, this relationship name should be used in graphql
 
@@ -64,4 +67,7 @@ export class Order extends Model {
   paymentModeId: number;
   @BelongsTo(() => PaymentMode)
   paymentMode: PaymentMode;
+
+  @BelongsToMany(() => Item, () => OrderItem)
+  items: Item[];
 }

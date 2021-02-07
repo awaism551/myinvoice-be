@@ -13,8 +13,6 @@ export class ItemResolver {
   @UseGuards(LoginGuard)
   @Roles(enumRoles.sales, enumRoles.manager, enumRoles.admin)
   async getItems() {
-    console.log('items resolver');
-
     return await this.itemService.getItems();
   }
 

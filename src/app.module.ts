@@ -16,6 +16,7 @@ import { ItemsModule } from './items/items.module';
 import { LoginModule } from './login/login.module';
 import { Order } from './orders/orders.model';
 import { OrdersModule } from './orders/orders.module';
+import { OrderItem } from './orders/orders_items.model';
 import { OrderStatus } from './orderStatuses/orderStatuses.model';
 import { OrderStatusesModule } from './orderStatuses/orderStatuses.module';
 import { PaymentMode } from './paymentModes/paymentModes.model';
@@ -52,6 +53,7 @@ import { VendorsModule } from './vendors/vendors.module';
           Unit,
           Balance,
           Order,
+          OrderItem,
         ],
       }),
       inject: [ConfigService],

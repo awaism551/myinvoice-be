@@ -95,6 +95,7 @@ export interface Order {
     user: User;
     status: OrderStatus;
     paymentMode?: PaymentMode;
+    items: Item[];
 }
 
 export interface PaymentMode {

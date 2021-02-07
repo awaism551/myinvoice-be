@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Customer } from 'src/customers/customers.model';
+import { Item } from 'src/items/items.model';
 import { OrderStatus } from 'src/orderStatuses/orderStatuses.model';
 import { PaymentMode } from 'src/paymentModes/paymentModes.model';
 import { User } from 'src/users/users.model';
@@ -7,7 +8,7 @@ import { Order } from './orders.model';
 
 @Injectable()
 export class OrderService {
-  parentModelsArray = [Customer, User, OrderStatus, PaymentMode];
+  parentModelsArray = [Customer, User, OrderStatus, PaymentMode, Item];
 
   async getOrders() {
     try {
