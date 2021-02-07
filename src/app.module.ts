@@ -14,6 +14,8 @@ import { CustomersModule } from './customers/customers.module';
 import { Item } from './items/items.model';
 import { ItemsModule } from './items/items.module';
 import { LoginModule } from './login/login.module';
+import { Order } from './orders/orders.model';
+import { OrdersModule } from './orders/orders.module';
 import { OrderStatus } from './orderStatuses/orderStatuses.model';
 import { OrderStatusesModule } from './orderStatuses/orderStatuses.module';
 import { PaymentMode } from './paymentModes/paymentModes.model';
@@ -49,6 +51,7 @@ import { VendorsModule } from './vendors/vendors.module';
           OrderStatus,
           Unit,
           Balance,
+          Order,
         ],
       }),
       inject: [ConfigService],
@@ -78,6 +81,7 @@ import { VendorsModule } from './vendors/vendors.module';
     OrderStatusesModule,
     UnitsModule,
     BalancesModule,
+    OrdersModule,
   ],
   providers: [
     {

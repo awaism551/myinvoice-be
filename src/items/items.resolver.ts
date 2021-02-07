@@ -4,6 +4,7 @@ import { LoginGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/roles/roles.decorator';
 import { enumRoles } from 'src/types';
 import { ItemService } from './items.service';
+
 @Resolver('Item')
 export class ItemResolver {
   constructor(private itemService: ItemService) {}
@@ -12,6 +13,8 @@ export class ItemResolver {
   @UseGuards(LoginGuard)
   @Roles(enumRoles.sales, enumRoles.manager, enumRoles.admin)
   async getItems() {
+    console.log('items resolver');
+
     return await this.itemService.getItems();
   }
 

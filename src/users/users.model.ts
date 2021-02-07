@@ -3,9 +3,11 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Order } from 'src/orders/orders.model';
 import { Role } from 'src/roles/roles.model';
 
 @Table
@@ -35,7 +37,9 @@ export class User extends Model {
     allowNull: false,
   })
   roleId: number;
-
   @BelongsTo(() => Role)
   role: Role;
+
+  @HasMany(() => Order)
+  orders: Order[];
 }

@@ -13,6 +13,7 @@ export class CategoryResolver {
   @UseGuards(LoginGuard)
   @Roles(enumRoles.sales, enumRoles.manager, enumRoles.admin)
   async getCategories() {
+    console.log('itemCategories resolver');
     return await this.categoryService.getItemCategories();
   }
 

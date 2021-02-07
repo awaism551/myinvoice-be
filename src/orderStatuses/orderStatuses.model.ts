@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Order } from 'src/orders/orders.model';
 
 @Table
 export class OrderStatus extends Model {
@@ -13,4 +14,8 @@ export class OrderStatus extends Model {
 
   @Column
   name: string;
+
+  @HasMany(() => Order)
+  orders: Order[]; 
+  // "orders" is name of relationship between these two entities
 }

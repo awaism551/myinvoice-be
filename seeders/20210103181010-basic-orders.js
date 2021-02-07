@@ -1,21 +1,26 @@
 'use strict';
+var tableName = 'Orders';
 
 module.exports = {
   up: (queryInterface) => {
-    var tableName = 'OrderStatuses';
     return queryInterface.bulkInsert(tableName, [
       {
-        name: 'Pending',
+        total: 600,
+        discount: 50,
+        net: 550,
+        userId: 1,
+        orderStatusId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'Delivered',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        name: 'Cancelled',
+        total: 1000,
+        discount: 100,
+        net: 900,
+        userId: 2,
+        customerId: 2,
+        orderStatusId: 2,
+        paymentModeId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

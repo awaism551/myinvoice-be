@@ -1,5 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Balance } from 'src/balances/balances.model';
+import { Order } from 'src/orders/orders.model';
 
 @Table
 export class Customer extends Model {
@@ -25,5 +26,8 @@ export class Customer extends Model {
   city: string;
 
   @HasMany(() => Balance)
-  balances: Balance[];
+  balance: Balance[];
+
+  @HasMany(() => Order)
+  orders: Order[];
 }

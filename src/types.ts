@@ -20,6 +20,7 @@ export interface IQuery {
     items(): Item[] | Promise<Item[]>;
     item(itemId: string): Item | Promise<Item>;
     orderStatuses(): OrderStatus[] | Promise<OrderStatus[]>;
+    orders(): Order[] | Promise<Order[]>;
     paymentModes(): PaymentMode[] | Promise<PaymentMode[]>;
     roles(): Role[] | Promise<Role[]>;
     units(): Unit[] | Promise<Unit[]>;
@@ -83,6 +84,17 @@ export interface LoginSuccessResponse {
 export interface OrderStatus {
     id: string;
     name: string;
+}
+
+export interface Order {
+    id: string;
+    total: number;
+    discount: number;
+    net: number;
+    customer?: Customer;
+    user: User;
+    status: OrderStatus;
+    paymentMode?: PaymentMode;
 }
 
 export interface PaymentMode {

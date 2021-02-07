@@ -43,16 +43,14 @@ export class Item extends Model {
     allowNull: false,
   })
   categoryId: number;
+  @BelongsTo(() => Category)
+  category: Category;
 
   @ForeignKey(() => Vendor)
   @Column({
     allowNull: false,
   })
   vendorId: number;
-
-  @BelongsTo(() => Category)
-  category: Category;
-
   @BelongsTo(() => Vendor)
   vendor: Vendor;
 }
