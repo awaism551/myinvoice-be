@@ -20,6 +20,18 @@ export class OrderService {
     }
   }
 
+  async getLatestOrder() {
+    try {
+      return await Order.findOne({
+        order: [['id', 'DESC']],
+        include: this.parentModelsArray,
+        raw: true,
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
   // async getOrder(id: number) {
   //   try {
   //     return await Order.findOne({

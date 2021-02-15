@@ -1,5 +1,6 @@
 type Query {
   orders: [Order!]
+  getLatestOrder: Order
 }
 
 type Order {

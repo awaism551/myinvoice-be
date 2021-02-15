@@ -11,4 +11,10 @@ export class OrderResolver {
   async getOrders() {
     return await this.orderService.getOrders();
   }
+
+  @Query('getLatestOrder')
+  @UseGuards(LoginGuard)
+  async getLatestOrder() {
+    return await this.orderService.getLatestOrder();
+  }
 }

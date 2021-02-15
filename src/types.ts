@@ -21,6 +21,7 @@ export interface IQuery {
     item(itemId: string): Item | Promise<Item>;
     orderStatuses(): OrderStatus[] | Promise<OrderStatus[]>;
     orders(): Order[] | Promise<Order[]>;
+    getLatestOrder(): Order | Promise<Order>;
     paymentModes(): PaymentMode[] | Promise<PaymentMode[]>;
     roles(): Role[] | Promise<Role[]>;
     units(): Unit[] | Promise<Unit[]>;
