@@ -1,6 +1,11 @@
 type Query {
   orders: [Order!]
   getLatestOrder: Order
+  order(orderId: ID!): Order
+}
+
+type Mutation {
+  saveOrder(input: OrderInput!, customerId: ID!): Order
 }
 
 type Order {
@@ -13,4 +18,12 @@ type Order {
   status: OrderStatus!
   paymentMode: PaymentMode
   items: [Item!]!
+}
+
+input OrderInput {
+  total: Float!
+  discount: Float!
+  net: Float!
+  userId: ID!
+  items: [ID!]!
 }

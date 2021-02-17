@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { Sequelize } from 'sequelize-typescript';
 import { Customer } from 'src/customers/customers.model';
 import { Item } from 'src/items/items.model';
 import { OrderStatus } from 'src/orderStatuses/orderStatuses.model';
 import { PaymentMode } from 'src/paymentModes/paymentModes.model';
+import { OrderInput } from 'src/types';
 import { User } from 'src/users/users.model';
 import { Order } from './orders.model';
-
+import { OrderItem } from './orders_items.model';
 @Injectable()
 export class OrderService {
+  constructor(
+    private sequelize: Sequelize, // @Inject('SequelizeInstance') private readonly sequelizeInstance,
+  ) {}
   parentModelsArray = [Customer, User, OrderStatus, PaymentMode, Item];
 
   async getOrders() {
@@ -25,62 +30,61 @@ export class OrderService {
       return await Order.findOne({
         order: [['id', 'DESC']],
         include: this.parentModelsArray,
-        raw: true,
       });
     } catch (error) {
       console.log('error', error);
     }
   }
 
-  // async getOrder(id: number) {
-  //   try {
-  //     return await Order.findOne({
-  //       where: {
-  //         id,
-  //       },
-  //       include: this.parentModelsArray,
-  //     });
-  //   } catch (error) {
-  //     console.log('error', error);
-  //   }
-  // }
+  async getOrder(id: number) {
+    try {
+      return await Order.findOne({
+        where: {
+          id,
+        },
+        include: this.parentModelsArray,
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
 
-  // async createOrder(name: string, price: number, categoryId: number) {
-  //   let createdOrder = await Order.create({ name, price, categoryId });
-  //   return await Order.findOne({
-  //     where: {
-  //       id: createdOrder.id,
-  //     },
-  //     include: this.parentModelsArray,
-  //   });
-  // }
+  async saveOrder(input: OrderInput, customerId: number) {
+    try {
+      return await this.sequelize.transaction(async (t) => {
+        let savedOrder = await Order.create(
+          {
+            ...input,
+            customerId,
+            orderStatusId: 1, // set to "PENDING"
+          },
+          {
+            transaction: t,
+          },
+        );
 
-  // async updateOrder(
-  //   id: number,
-  //   name?: string,
-  //   price?: number,
-  //   categoryId?: string,
-  // ) {
-  //   let affectedRows;
-  //   try {
-  //     affectedRows = await Order.update(
-  //       { name, price, categoryId },
-  //       { where: { id } },
-  //     );
-  //     if (affectedRows[0] === 1) {
-  //       return await Order.findOne({
-  //         where: {
-  //           id,
-  //         },
-  //         include: this.parentModelsArray,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log('error update::', error);
-  //   }
-  // }
+        await input.items.forEach(async (itemId) => {
+          await OrderItem.bulkCreate(
+            [
+              {
+                itemId,
+                orderId: savedOrder.id,
+              },
+            ],
+            {
+              transaction: t,
+            },
+          );
+        });
 
-  // async deleteOrder(id: number) {
-  //   return (await Order.destroy({ where: { id } })) === 1 ? true : false;
-  // }
+        return await Order.findOne({
+          order: [['id', 'DESC']],
+          include: this.parentModelsArray,
+          transaction: t,
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }

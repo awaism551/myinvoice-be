@@ -12,6 +12,14 @@ export enum enumRoles {
     sales = "sales"
 }
 
+export interface OrderInput {
+    total: number;
+    discount: number;
+    net: number;
+    userId: string;
+    items: string[];
+}
+
 export interface IQuery {
     balances(): Balance[] | Promise<Balance[]>;
     itemCategories(): ItemCategory[] | Promise<ItemCategory[]>;
@@ -22,6 +30,7 @@ export interface IQuery {
     orderStatuses(): OrderStatus[] | Promise<OrderStatus[]>;
     orders(): Order[] | Promise<Order[]>;
     getLatestOrder(): Order | Promise<Order>;
+    order(orderId: string): Order | Promise<Order>;
     paymentModes(): PaymentMode[] | Promise<PaymentMode[]>;
     roles(): Role[] | Promise<Role[]>;
     units(): Unit[] | Promise<Unit[]>;
@@ -44,6 +53,7 @@ export interface IMutation {
     updateItem(itemId: string, name?: string, price?: number, categoryId?: string): Item | Promise<Item>;
     deleteItem(itemId: string): boolean | Promise<boolean>;
     login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;
+    saveOrder(input: OrderInput, customerId: string): Order | Promise<Order>;
     createUser(name: string, email: string, password: string, roleId: string): User | Promise<User>;
     updateUser(userId: string, name?: string, password?: string, roleId?: string): User | Promise<User>;
     deleteUser(userId: string): boolean | Promise<boolean>;
