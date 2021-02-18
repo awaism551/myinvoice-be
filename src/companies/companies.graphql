@@ -1,0 +1,10 @@
+type Query {
+  companies: [Company!]
+}
+
+type Company {
+  id: ID!
+  name: String!
+  address: String!
+  phoneNo: Float!
+}
