@@ -13,4 +13,16 @@ export class BalanceService {
       console.log('error', error);
     }
   }
+
+  async getBalanceByCustomer(customerId: number) {
+    try {
+      return await Balance.findOne({
+        where: {
+          customerId,
+        },
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
 }

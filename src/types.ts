@@ -22,6 +22,7 @@ export interface OrderInput {
 
 export interface IQuery {
     balances(): Balance[] | Promise<Balance[]>;
+    getBalanceByCustomer(customerId: string): Balance | Promise<Balance>;
     itemCategories(): ItemCategory[] | Promise<ItemCategory[]>;
     itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;
     companies(): Company[] | Promise<Company[]>;
