@@ -6,6 +6,7 @@ type Query {
 
 type Mutation {
   saveOrder(input: OrderInput!, customerId: ID!): Order
+  savePayment(input: OrderInput!, paymentModeId: ID!, customerId: ID): Order
 }
 
 type Order {

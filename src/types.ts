@@ -24,6 +24,7 @@ export interface IQuery {
     balances(): Balance[] | Promise<Balance[]>;
     itemCategories(): ItemCategory[] | Promise<ItemCategory[]>;
     itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;
+    companies(): Company[] | Promise<Company[]>;
     customers(): Customer[] | Promise<Customer[]>;
     items(): Item[] | Promise<Item[]>;
     item(itemId: string): Item | Promise<Item>;
@@ -54,6 +55,7 @@ export interface IMutation {
     deleteItem(itemId: string): boolean | Promise<boolean>;
     login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;
     saveOrder(input: OrderInput, customerId: string): Order | Promise<Order>;
+    savePayment(input: OrderInput, paymentModeId: string, customerId?: string): Order | Promise<Order>;
     createUser(name: string, email: string, password: string, roleId: string): User | Promise<User>;
     updateUser(userId: string, name?: string, password?: string, roleId?: string): User | Promise<User>;
     deleteUser(userId: string): boolean | Promise<boolean>;
@@ -63,6 +65,13 @@ export interface ItemCategory {
     id: string;
     title: string;
     items?: Item[];
+}
+
+export interface Company {
+    id: string;
+    name: string;
+    address: string;
+    phoneNo: number;
 }
 
 export interface Customer {

@@ -9,6 +9,8 @@ import { Balance } from './balances/balances.model';
 import { BalancesModule } from './balances/balances.module';
 import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
+import { Company } from './companies/companies.model';
+import { CompaniesModule } from './companies/companies.module';
 import { Customer } from './customers/customers.model';
 import { CustomersModule } from './customers/customers.module';
 import { Item } from './items/items.model';
@@ -54,6 +56,7 @@ import { VendorsModule } from './vendors/vendors.module';
           Balance,
           Order,
           OrderItem,
+          Company,
         ],
       }),
       inject: [ConfigService],
@@ -84,6 +87,7 @@ import { VendorsModule } from './vendors/vendors.module';
     UnitsModule,
     BalancesModule,
     OrdersModule,
+    CompaniesModule,
   ],
   providers: [
     {

@@ -87,4 +87,48 @@ export class OrderService {
       console.log(err);
     }
   }
+
+  async savePayment(
+    input: OrderInput,
+    paymentModeId: number,
+    customerId?: number,
+  ) {
+    try {
+      return await this.sequelize.transaction(async (t) => {
+        let savedOrder = await Order.create(
+          {
+            ...input,
+            customerId,
+            orderStatusId: 2, // set to "DELIVERED",
+            paymentModeId,
+          },
+          {
+            transaction: t,
+          },
+        );
+
+        await input.items.forEach(async (itemId) => {
+          await OrderItem.bulkCreate(
+            [
+              {
+                itemId,
+                orderId: savedOrder.id,
+              },
+            ],
+            {
+              transaction: t,
+            },
+          );
+        });
+
+        return await Order.findOne({
+          order: [['id', 'DESC']],
+          include: this.parentModelsArray,
+          transaction: t,
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }

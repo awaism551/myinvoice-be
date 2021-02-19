@@ -30,7 +30,7 @@ export class OrderResolver {
 
   @Mutation('saveOrder')
   @UseGuards(LoginGuard)
-  async create(
+  async saveOrder(
     @Args('input') input: OrderInput,
     @Args('customerId', ParseIntPipe) customerId: number,
   ) {
@@ -40,6 +40,31 @@ export class OrderResolver {
       throw new Error('Items are required!');
     } else {
       return await this.orderService.saveOrder(input, customerId);
+    }
+  }
+
+  @Mutation('savePayment')
+  @UseGuards(LoginGuard)
+  async savePayment(
+    @Args('input') input: OrderInput,
+    @Args('paymentModeId', ParseIntPipe) paymentModeId: number,
+    @Args('customerId', {
+      nullable: true,
+    })
+    customerId: number,
+  ) {
+    if (!paymentModeId) {
+      throw new Error('Payment Mode is required!');
+    } else if (!input.items.length) {
+      throw new Error('Items are required!');
+    } else if (paymentModeId === 2 && !customerId) {
+      throw new Error('Customer is Required For Credit Payment');
+    } else {
+      return await this.orderService.savePayment(
+        input,
+        paymentModeId,
+        customerId,
+      );
     }
   }
 }
