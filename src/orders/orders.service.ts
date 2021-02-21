@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
+import { Balance } from 'src/balances/balances.model';
 import { Customer } from 'src/customers/customers.model';
 import { Item } from 'src/items/items.model';
 import { OrderStatus } from 'src/orderStatuses/orderStatuses.model';
@@ -120,6 +121,39 @@ export class OrderService {
             },
           );
         });
+
+        if (paymentModeId === 2) {
+          // CREDIT PAYMENT, NEEDS TO SAVE IN BALANCES SECTION
+          let existingBalance = await Balance.findOne({
+            where: {
+              customerId,
+            },
+            transaction: t,
+          });
+          if (!existingBalance) {
+            await Balance.create(
+              {
+                customerId,
+                amount: input.net,
+              },
+              {
+                transaction: t,
+              },
+            );
+          } else {
+            await Balance.update(
+              {
+                amount: input.net + existingBalance.amount,
+              },
+              {
+                where: {
+                  customerId,
+                },
+                transaction: t,
+              },
+            );
+          }
+        }
 
         return await Order.findOne({
           order: [['id', 'DESC']],
