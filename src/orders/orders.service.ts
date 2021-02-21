@@ -143,7 +143,7 @@ export class OrderService {
           } else {
             await Balance.update(
               {
-                amount: input.net + existingBalance.amount,
+                amount: input.net, // NO NEED TO ADD PREV AMOUNT IN AMOUNT BECAUSE THATS ALREADY BEEN HANDLED ON FRONTEND
               },
               {
                 where: {
