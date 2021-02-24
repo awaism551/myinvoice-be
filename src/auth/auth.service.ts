@@ -35,7 +35,9 @@ export class AuthService {
       userId: this.user.id.toString(),
       name: this.user.name,
       role: this.user.role,
-      access_token: this.jwtService.sign(user),
+      access_token: this.jwtService.sign(user, {
+        expiresIn: '365d',
+      }),
     };
     // console.log('authservice::login::returnObj', returnObj);
   }
