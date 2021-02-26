@@ -12,6 +12,17 @@ export enum enumRoles {
     sales = "sales"
 }
 
+export interface ItemInput {
+    name?: string;
+    price?: number;
+    discount?: number;
+    length?: number;
+    weight?: number;
+    stock?: number;
+    categoryId?: string;
+    vendorId?: string;
+}
+
 export interface OrderInput {
     total: number;
     discount: number;
@@ -52,7 +63,7 @@ export interface IMutation {
     updateItemCategory(itemCategoryId: string, title: string): ItemCategory | Promise<ItemCategory>;
     deleteItemCategory(itemCategoryId: string): boolean | Promise<boolean>;
     createItem(name: string, price: number, categoryId: string): Item | Promise<Item>;
-    updateItem(itemId: string, name?: string, price?: number, categoryId?: string): Item | Promise<Item>;
+    updateItem(itemId: string, input: ItemInput): Item | Promise<Item>;
     deleteItem(itemId: string): boolean | Promise<boolean>;
     login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;
     saveOrder(input: OrderInput, customerId: string): Order | Promise<Order>;

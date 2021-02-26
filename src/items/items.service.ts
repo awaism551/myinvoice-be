@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from 'src/categories/categories.model';
+import { ItemInput } from 'src/types';
 import { Vendor } from 'src/vendors/vendors.model';
 import { Item } from './items.model';
 
@@ -39,18 +40,10 @@ export class ItemService {
     });
   }
 
-  async updateItem(
-    id: number,
-    name?: string,
-    price?: number,
-    categoryId?: string,
-  ) {
+  async updateItem(id: number, input: ItemInput) {
     let affectedRows;
     try {
-      affectedRows = await Item.update(
-        { name, price, categoryId },
-        { where: { id } },
-      );
+      affectedRows = await Item.update({ ...input }, { where: { id } });
       if (affectedRows[0] === 1) {
         return await Item.findOne({
           where: {

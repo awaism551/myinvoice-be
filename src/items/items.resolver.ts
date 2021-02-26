@@ -2,7 +2,7 @@ import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { LoginGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/roles/roles.decorator';
-import { enumRoles } from 'src/types';
+import { enumRoles, ItemInput } from 'src/types';
 import { ItemService } from './items.service';
 
 @Resolver('Item')
@@ -42,17 +42,17 @@ export class ItemResolver {
   @Roles(enumRoles.manager, enumRoles.admin)
   async update(
     @Args('itemId', ParseIntPipe) id: number,
-    @Args('name') name?: string,
-    @Args('price') price?: number,
-    @Args('categoryId') categoryId?: string,
+    @Args('input') input: ItemInput,
   ) {
-    if (!name && !price && !categoryId) {
-      throw new Error(
-        'Please provide one of the following fields:Name, Price, Category',
-      );
+    if (!input || this.isEmpty(input)) {
+      throw new Error('Please provide atleast One Field To Update');
     } else {
-      return await this.itemService.updateItem(id, name, price, categoryId);
+      return await this.itemService.updateItem(id, input);
     }
+  }
+
+  isEmpty(obj) {
+    return Object.keys(obj).length === 0;
   }
 
   @Mutation('deleteItem')

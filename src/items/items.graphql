@@ -4,7 +4,7 @@ type Query {
 }
 type Mutation {
   createItem(name: String!, price: Float!, categoryId: ID!): Item
-  updateItem(itemId: ID!, name: String, price: Float, categoryId: ID): Item
+  updateItem(itemId: ID!, input: ItemInput!): Item
   deleteItem(itemId: ID!): Boolean
 }
 type Item {
@@ -17,4 +17,14 @@ type Item {
   stock: Float!
   category: ItemCategory!
   vendor: Vendor!
+}
+input ItemInput {
+  name: String
+  price: Float
+  discount: Float
+  length: Float
+  weight: Float
+  stock: Float
+  categoryId: ID
+  vendorId: ID
 }
