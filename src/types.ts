@@ -62,7 +62,7 @@ export interface IMutation {
     createItemCategory(title: string): ItemCategory | Promise<ItemCategory>;
     updateItemCategory(itemCategoryId: string, title: string): ItemCategory | Promise<ItemCategory>;
     deleteItemCategory(itemCategoryId: string): boolean | Promise<boolean>;
-    createItem(name: string, price: number, categoryId: string): Item | Promise<Item>;
+    createItem(input: ItemInput): Item | Promise<Item>;
     updateItem(itemId: string, input: ItemInput): Item | Promise<Item>;
     deleteItem(itemId: string): boolean | Promise<boolean>;
     login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;

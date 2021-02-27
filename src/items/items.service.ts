@@ -30,8 +30,8 @@ export class ItemService {
     }
   }
 
-  async createItem(name: string, price: number, categoryId: number) {
-    let createdItem = await Item.create({ name, price, categoryId });
+  async createItem(input: ItemInput) {
+    let createdItem = await Item.create({ ...input });
     return await Item.findOne({
       where: {
         id: createdItem.id,

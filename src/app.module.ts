@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql/dist/graphql.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { Balance } from './balances/balances.model';
@@ -74,9 +73,9 @@ import { VendorsModule } from './vendors/vendors.module';
     UsersModule,
     AuthModule,
     LoginModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'front'),
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'front'),
+    // }),
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,

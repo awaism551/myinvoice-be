@@ -29,12 +29,14 @@ export class ItemResolver {
   @Mutation('createItem')
   @UseGuards(LoginGuard)
   @Roles(enumRoles.manager, enumRoles.admin)
-  async create(
-    @Args('name') name: string,
-    @Args('price') price: number,
-    @Args('categoryId') categoryId: number,
-  ) {
-    return await this.itemService.createItem(name, price, categoryId);
+  async create(@Args('input') input: ItemInput) {
+    if (!input) {
+      throw new Error('Input Cannot Be Empty');
+    } else if (!this.between(input.discount, 0, 100)) {
+      throw new Error('Discount minimum value is 0 and maximum value is 100');
+    } else {
+      return await this.itemService.createItem(input);
+    }
   }
 
   @Mutation('updateItem')
@@ -46,9 +48,15 @@ export class ItemResolver {
   ) {
     if (!input || this.isEmpty(input)) {
       throw new Error('Please provide atleast One Field To Update');
+    } else if (!this.between(input.discount, 0, 100)) {
+      throw new Error('Discount minimum value is 0 and maximum value is 100');
     } else {
       return await this.itemService.updateItem(id, input);
     }
+  }
+
+  between(x, min, max) {
+    return x >= min && x <= max;
   }
 
   isEmpty(obj) {

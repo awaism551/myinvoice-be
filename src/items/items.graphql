@@ -3,7 +3,7 @@ type Query {
   item(itemId: ID!): Item
 }
 type Mutation {
-  createItem(name: String!, price: Float!, categoryId: ID!): Item
+  createItem(input: ItemInput!): Item
   updateItem(itemId: ID!, input: ItemInput!): Item
   deleteItem(itemId: ID!): Boolean
 }
