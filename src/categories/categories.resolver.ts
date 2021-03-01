@@ -30,10 +30,7 @@ export class CategoryResolver {
   @UseGuards(LoginGuard)
   @Roles(enumRoles.manager, enumRoles.admin)
   async create(@Args('title') title: string) {
-    const createdCategory = await this.categoryService.createItemCategory(
-      title,
-    );
-    return createdCategory;
+    return await this.categoryService.createItemCategory(title);
   }
 
   @Mutation('updateItemCategory')
@@ -43,11 +40,7 @@ export class CategoryResolver {
     @Args('itemCategoryId', ParseIntPipe) id: number,
     @Args('title') title: string,
   ) {
-    const updatedCategory = await this.categoryService.updateItemCategory(
-      id,
-      title,
-    );
-    return updatedCategory;
+    return await this.categoryService.updateItemCategory(id, title);
   }
 
   @Mutation('deleteItemCategory')

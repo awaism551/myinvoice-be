@@ -12,6 +12,13 @@ export enum enumRoles {
     sales = "sales"
 }
 
+export interface CustomerInput {
+    name?: string;
+    phoneNo?: number;
+    address?: string;
+    city?: string;
+}
+
 export interface ItemInput {
     name?: string;
     price?: number;
@@ -38,6 +45,7 @@ export interface IQuery {
     itemCategory(itemCategoryId: string): ItemCategory | Promise<ItemCategory>;
     companies(): Company[] | Promise<Company[]>;
     customers(): Customer[] | Promise<Customer[]>;
+    customer(customerId: string): Customer | Promise<Customer>;
     items(): Item[] | Promise<Item[]>;
     item(itemId: string): Item | Promise<Item>;
     orderStatuses(): OrderStatus[] | Promise<OrderStatus[]>;
@@ -62,6 +70,9 @@ export interface IMutation {
     createItemCategory(title: string): ItemCategory | Promise<ItemCategory>;
     updateItemCategory(itemCategoryId: string, title: string): ItemCategory | Promise<ItemCategory>;
     deleteItemCategory(itemCategoryId: string): boolean | Promise<boolean>;
+    createCustomer(input: CustomerInput): Customer | Promise<Customer>;
+    updateCustomer(customerId: string, input: CustomerInput): Customer | Promise<Customer>;
+    deleteCustomer(customerId: string): boolean | Promise<boolean>;
     createItem(input: ItemInput): Item | Promise<Item>;
     updateItem(itemId: string, input: ItemInput): Item | Promise<Item>;
     deleteItem(itemId: string): boolean | Promise<boolean>;
