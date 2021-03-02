@@ -58,6 +58,7 @@ export interface IQuery {
     users(): User[] | Promise<User[]>;
     user(userId: string): User | Promise<User>;
     vendors(): Vendor[] | Promise<Vendor[]>;
+    vendor(vendorId: string): Vendor | Promise<Vendor>;
 }
 
 export interface Balance {
@@ -82,6 +83,9 @@ export interface IMutation {
     createUser(name: string, email: string, password: string, roleId: string): User | Promise<User>;
     updateUser(userId: string, name?: string, password?: string, roleId?: string): User | Promise<User>;
     deleteUser(userId: string): boolean | Promise<boolean>;
+    createVendor(name: string): Vendor | Promise<Vendor>;
+    updateVendor(vendorId: string, name: string): Vendor | Promise<Vendor>;
+    deleteVendor(vendorId: string): boolean | Promise<boolean>;
 }
 
 export interface ItemCategory {

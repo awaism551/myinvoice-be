@@ -1,5 +1,11 @@
 type Query {
   vendors: [Vendor!]
+  vendor(vendorId: ID!): Vendor
+}
+type Mutation {
+  createVendor(name: String!): Vendor
+  updateVendor(vendorId: ID!, name: String!): Vendor
+  deleteVendor(vendorId: ID!): Boolean
 }
 
 type Vendor {
