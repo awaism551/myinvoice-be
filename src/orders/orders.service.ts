@@ -11,9 +11,7 @@ import { Order } from './orders.model';
 import { OrderItem } from './orders_items.model';
 @Injectable()
 export class OrderService {
-  constructor(
-    private sequelize: Sequelize, // @Inject('SequelizeInstance') private readonly sequelizeInstance,
-  ) {}
+  constructor(private sequelize: Sequelize) {}
   parentModelsArray = [Customer, User, OrderStatus, PaymentMode, Item];
 
   async getOrders() {

@@ -107,6 +107,7 @@ export interface Customer {
     phoneNo: number;
     address: string;
     city: string;
+    balance?: Balance;
 }
 
 export interface Item {
@@ -142,6 +143,8 @@ export interface Order {
     user: User;
     status: OrderStatus;
     paymentMode?: PaymentMode;
+    createdAt: number;
+    updatedAt: number;
     items: Item[];
 }
 

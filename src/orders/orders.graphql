@@ -18,6 +18,8 @@ type Order {
   user: User!
   status: OrderStatus!
   paymentMode: PaymentMode
+  createdAt: Float!
+  updatedAt: Float!
   items: [Item!]!
 }
 

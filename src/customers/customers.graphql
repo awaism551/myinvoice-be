@@ -13,6 +13,7 @@ type Customer {
   phoneNo: Float!
   address: String!
   city: String!
+  balance: Balance
 }
 input CustomerInput {
   name: String

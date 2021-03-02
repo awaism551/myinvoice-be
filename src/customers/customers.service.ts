@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Balance } from 'src/balances/balances.model';
 import { CustomerInput } from 'src/types';
 import { Customer } from './customers.model';
 
@@ -6,7 +7,9 @@ import { Customer } from './customers.model';
 export class CustomerService {
   async getCustomers() {
     try {
-      return await Customer.findAll();
+      return await Customer.findAll({
+        include: Balance,
+      });
     } catch (error) {
       console.log('error', error);
     }
@@ -18,6 +21,7 @@ export class CustomerService {
         where: {
           id,
         },
+        include: Balance,
       });
     } catch (error) {
       console.log('error', error);
