@@ -33,6 +33,7 @@ export interface ItemInput {
 export interface OrderInput {
     total: number;
     discount: number;
+    tax: number;
     net: number;
     userId: string;
     items: string[];
@@ -138,6 +139,7 @@ export interface Order {
     id: string;
     total: number;
     discount: number;
+    tax: number;
     net: number;
     customer?: Customer;
     user: User;

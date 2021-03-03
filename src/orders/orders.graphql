@@ -13,6 +13,7 @@ type Order {
   id: ID!
   total: Float!
   discount: Float!
+  tax: Float!
   net: Float!
   customer: Customer
   user: User!
@@ -26,6 +27,7 @@ type Order {
 input OrderInput {
   total: Float!
   discount: Float!
+  tax: Float!
   net: Float!
   userId: ID!
   items: [ID!]!

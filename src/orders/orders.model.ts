@@ -32,6 +32,9 @@ export class Order extends Model {
   discount: number;
 
   @Column
+  tax: number;
+
+  @Column
   net: number;
 
   @ForeignKey(() => Customer)

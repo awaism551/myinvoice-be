@@ -7,7 +7,8 @@ module.exports = {
       {
         total: 600,
         discount: 50,
-        net: 550,
+        tax: 25,
+        net: 575,
         userId: 1,
         orderStatusId: 1,
         createdAt: new Date(),
@@ -16,7 +17,8 @@ module.exports = {
       {
         total: 1000,
         discount: 100,
-        net: 900,
+        tax: 20,
+        net: 920,
         userId: 2,
         customerId: 2,
         orderStatusId: 2,

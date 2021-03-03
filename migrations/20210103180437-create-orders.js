@@ -18,6 +18,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      tax: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       net: {
         allowNull: false,
         type: Sequelize.INTEGER,
