@@ -165,4 +165,23 @@ export class OrderService {
       console.log(err);
     }
   }
+
+  async completePayment(orderId: number) {
+    try {
+      let order = await Order.update(
+        {
+          orderStatusId: 2, // DELIVERED
+          paymentModeId: 1, // CASH
+        },
+        {
+          where: {
+            id: orderId,
+          },
+        },
+      );
+      return order ? true : false;
+    } catch (error) {
+      console.log('error update order::', error);
+    }
+  }
 }

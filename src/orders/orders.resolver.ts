@@ -67,4 +67,10 @@ export class OrderResolver {
       );
     }
   }
+
+  @Mutation('completePayment')
+  @UseGuards(LoginGuard)
+  async completePayment(@Args('orderId', ParseIntPipe) orderId: number) {
+    return await this.orderService.completePayment(orderId);
+  }
 }

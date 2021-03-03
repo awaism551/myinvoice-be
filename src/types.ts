@@ -86,6 +86,7 @@ export interface IMutation {
     login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;
     saveOrder(input: OrderInput, customerId: string): Order | Promise<Order>;
     savePayment(input: OrderInput, paymentModeId: string, customerId?: string): Order | Promise<Order>;
+    completePayment(orderId: string): boolean | Promise<boolean>;
     createUser(name: string, email: string, password: string, roleId: string): User | Promise<User>;
     updateUser(userId: string, name?: string, password?: string, roleId?: string): User | Promise<User>;
     deleteUser(userId: string): boolean | Promise<boolean>;
