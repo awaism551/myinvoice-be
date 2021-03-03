@@ -32,4 +32,9 @@ export class OrderItem extends Model {
     allowNull: false,
   })
   itemId: number;
+
+  @Column({
+    allowNull: false,
+  })
+  quantity: number;
 }

@@ -17,7 +17,16 @@ type Item {
   stock: Float!
   category: ItemCategory!
   vendor: Vendor!
+  OrderItem: OrderItem
 }
+
+type OrderItem {
+  id: ID!
+  orderId: ID!
+  itemId: ID!
+  quantity: Float!
+}
+
 input ItemInput {
   name: String
   price: Float

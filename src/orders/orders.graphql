@@ -23,12 +23,15 @@ type Order {
   updatedAt: Float!
   items: [Item!]!
 }
-
 input OrderInput {
   total: Float!
   discount: Float!
   tax: Float!
   net: Float!
   userId: ID!
-  items: [ID!]!
+  items: [ItemQuantityInput!]!
+}
+input ItemQuantityInput {
+  itemId: ID!
+  quantity: Int!
 }

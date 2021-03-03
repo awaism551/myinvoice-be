@@ -36,7 +36,12 @@ export interface OrderInput {
     tax: number;
     net: number;
     userId: string;
-    items: string[];
+    items: ItemQuantityInput[];
+}
+
+export interface ItemQuantityInput {
+    itemId: string;
+    quantity: number;
 }
 
 export interface IQuery {
@@ -121,6 +126,14 @@ export interface Item {
     stock: number;
     category: ItemCategory;
     vendor: Vendor;
+    OrderItem?: OrderItem;
+}
+
+export interface OrderItem {
+    id: string;
+    orderId: string;
+    itemId: string;
+    quantity: number;
 }
 
 export interface LoginSuccessResponse {

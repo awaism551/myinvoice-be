@@ -41,7 +41,7 @@ export class OrderService {
         where: {
           id,
         },
-        include: this.parentModelsArray,
+        include: [{ all: true, nested: true }],
       });
     } catch (error) {
       console.log('error', error);
@@ -62,12 +62,13 @@ export class OrderService {
           },
         );
 
-        await input.items.forEach(async (itemId) => {
+        await input.items.forEach(async (item) => {
           await OrderItem.bulkCreate(
             [
               {
-                itemId,
+                itemId: item.itemId,
                 orderId: savedOrder.id,
+                quantity: item.quantity,
               },
             ],
             {
@@ -106,12 +107,13 @@ export class OrderService {
           },
         );
 
-        await input.items.forEach(async (itemId) => {
+        await input.items.forEach(async (item) => {
           await OrderItem.bulkCreate(
             [
               {
-                itemId,
+                itemId: item.itemId,
                 orderId: savedOrder.id,
+                quantity: item.quantity,
               },
             ],
             {
