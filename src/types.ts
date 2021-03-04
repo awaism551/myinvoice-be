@@ -34,7 +34,6 @@ export interface OrderInput {
     total: number;
     discount: number;
     tax: number;
-    net: number;
     userId: string;
     items: ItemQuantityInput[];
 }
@@ -85,7 +84,7 @@ export interface IMutation {
     deleteItem(itemId: string): boolean | Promise<boolean>;
     login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;
     saveOrder(input: OrderInput, customerId: string): Order | Promise<Order>;
-    savePayment(input: OrderInput, paymentModeId: string, customerId?: string): Order | Promise<Order>;
+    savePayment(input: OrderInput, isPrevBalanceIncluded: boolean, paymentModeId: string, previousBalance?: number, customerId?: string): Order | Promise<Order>;
     completePayment(orderId: string): boolean | Promise<boolean>;
     createUser(name: string, email: string, password: string, roleId: string): User | Promise<User>;
     updateUser(userId: string, name?: string, password?: string, roleId?: string): User | Promise<User>;
@@ -154,6 +153,8 @@ export interface Order {
     total: number;
     discount: number;
     tax: number;
+    isPrevBalanceIncluded?: boolean;
+    previousBalance?: number;
     net: number;
     customer?: Customer;
     user: User;

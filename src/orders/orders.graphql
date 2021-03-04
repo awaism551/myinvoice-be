@@ -6,7 +6,13 @@ type Query {
 
 type Mutation {
   saveOrder(input: OrderInput!, customerId: ID!): Order
-  savePayment(input: OrderInput!, paymentModeId: ID!, customerId: ID): Order
+  savePayment(
+    input: OrderInput!
+    isPrevBalanceIncluded: Boolean!
+    paymentModeId: ID!
+    previousBalance: Float
+    customerId: ID
+  ): Order
   completePayment(orderId: ID!): Boolean
 }
 
@@ -15,6 +21,8 @@ type Order {
   total: Float!
   discount: Float!
   tax: Float!
+  isPrevBalanceIncluded: Boolean
+  previousBalance: Float
   net: Float!
   customer: Customer
   user: User!
@@ -28,7 +36,6 @@ input OrderInput {
   total: Float!
   discount: Float!
   tax: Float!
-  net: Float!
   userId: ID!
   items: [ItemQuantityInput!]!
 }

@@ -26,6 +26,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      isPrevBalanceIncluded: {
+        allowNull: true,
+        type: Sequelize.BOOLEAN,
+      },
+      previousBalance: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+      },
       customerId: {
         type: Sequelize.INTEGER,
         allowNull: true,

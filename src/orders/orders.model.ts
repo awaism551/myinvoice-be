@@ -37,6 +37,16 @@ export class Order extends Model {
   @Column
   net: number;
 
+  @Column({
+    allowNull: true,
+  })
+  isPrevBalanceIncluded: boolean;
+
+  @Column({
+    allowNull: true,
+  })
+  previousBalance: number;
+
   @ForeignKey(() => Customer)
   @Column({
     allowNull: true,

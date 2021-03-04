@@ -3,6 +3,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { LoginGuard } from 'src/auth/jwt-auth.guard';
 import { OrderInput } from 'src/types';
 import { OrderService } from './orders.service';
+
 @Resolver('Order')
 export class OrderResolver {
   constructor(private orderService: OrderService) {}
@@ -47,7 +48,12 @@ export class OrderResolver {
   @UseGuards(LoginGuard)
   async savePayment(
     @Args('input') input: OrderInput,
+    @Args('isPrevBalanceIncluded') isPrevBalanceIncluded: boolean,
     @Args('paymentModeId', ParseIntPipe) paymentModeId: number,
+    @Args('previousBalance', {
+      nullable: true,
+    })
+    previousBalance: number,
     @Args('customerId', {
       nullable: true,
     })
@@ -62,7 +68,9 @@ export class OrderResolver {
     } else {
       return await this.orderService.savePayment(
         input,
+        isPrevBalanceIncluded,
         paymentModeId,
+        previousBalance,
         customerId,
       );
     }

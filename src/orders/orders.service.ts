@@ -54,6 +54,7 @@ export class OrderService {
         let savedOrder = await Order.create(
           {
             ...input,
+            net: input.total + input.tax - input.discount,
             customerId,
             orderStatusId: 1, // set to "PENDING"
           },
@@ -90,15 +91,22 @@ export class OrderService {
 
   async savePayment(
     input: OrderInput,
+    isPrevBalanceIncluded: boolean,
     paymentModeId: number,
+    previousBalance: number = 0,
     customerId?: number,
   ) {
     try {
+      let netAmount =
+        input.total + input.tax + previousBalance - input.discount;
       return await this.sequelize.transaction(async (t) => {
         let savedOrder = await Order.create(
           {
             ...input,
+            net: netAmount,
             customerId,
+            isPrevBalanceIncluded,
+            previousBalance,
             orderStatusId: 2, // set to "DELIVERED",
             paymentModeId,
           },
@@ -134,7 +142,7 @@ export class OrderService {
             await Balance.create(
               {
                 customerId,
-                amount: input.net,
+                amount: netAmount,
               },
               {
                 transaction: t,
@@ -143,7 +151,7 @@ export class OrderService {
           } else {
             await Balance.update(
               {
-                amount: input.net, // NO NEED TO ADD PREV AMOUNT IN AMOUNT BECAUSE THATS ALREADY BEEN HANDLED ON FRONTEND
+                amount: netAmount,
               },
               {
                 where: {
@@ -153,6 +161,12 @@ export class OrderService {
               },
             );
           }
+        }
+
+        if (paymentModeId === 1 && isPrevBalanceIncluded) {
+          // CASH PAYMENT, AND CUSTOMER HAS ALSO CLEARED PREVIOUS PAYMENT
+          // SO NEED TO CLEAR CUSTOMER PREVIOUS BALANCE
+          await Balance.destroy({ where: { customerId }, transaction: t });
         }
 
         return await Order.findOne({
