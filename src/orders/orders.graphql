@@ -13,7 +13,14 @@ type Mutation {
     previousBalance: Float
     customerId: ID
   ): Order
-  completePayment(orderId: ID!): Boolean
+  completePayment(
+    orderId: ID!
+    isPrevBalanceIncluded: Boolean!
+    paymentModeId: ID!
+    customerId: ID!
+    net: Float!
+    previousBalance: Float
+  ): Boolean
 }
 
 type Order {

@@ -85,7 +85,7 @@ export interface IMutation {
     login(username: string, password: string): LoginSuccessResponse | Promise<LoginSuccessResponse>;
     saveOrder(input: OrderInput, customerId: string): Order | Promise<Order>;
     savePayment(input: OrderInput, isPrevBalanceIncluded: boolean, paymentModeId: string, previousBalance?: number, customerId?: string): Order | Promise<Order>;
-    completePayment(orderId: string): boolean | Promise<boolean>;
+    completePayment(orderId: string, isPrevBalanceIncluded: boolean, paymentModeId: string, customerId: string, net: number, previousBalance?: number): boolean | Promise<boolean>;
     createUser(name: string, email: string, password: string, roleId: string): User | Promise<User>;
     updateUser(userId: string, name?: string, password?: string, roleId?: string): User | Promise<User>;
     deleteUser(userId: string): boolean | Promise<boolean>;

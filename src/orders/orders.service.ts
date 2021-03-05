@@ -180,22 +180,75 @@ export class OrderService {
     }
   }
 
-  async completePayment(orderId: number) {
+  async completePayment(
+    orderId: number,
+    isPrevBalanceIncluded: boolean,
+    paymentModeId: number,
+    customerId: number,
+    net: number,
+    previousBalance?: number,
+  ) {
     try {
-      let order = await Order.update(
-        {
-          orderStatusId: 2, // DELIVERED
-          paymentModeId: 1, // CASH
-        },
-        {
-          where: {
-            id: orderId,
+      return await this.sequelize.transaction(async (t) => {
+        let order = await Order.update(
+          {
+            orderStatusId: 2, // DELIVERED
+            paymentModeId,
+            isPrevBalanceIncluded,
+            previousBalance,
+            net,
           },
-        },
-      );
-      return order ? true : false;
+          {
+            where: {
+              id: orderId,
+            },
+            transaction: t,
+          },
+        );
+
+        if (paymentModeId === 2) {
+          // CREDIT PAYMENT, NEEDS TO SAVE IN BALANCES SECTION
+          let existingBalance = await Balance.findOne({
+            where: {
+              customerId,
+            },
+            transaction: t,
+          });
+          if (!existingBalance) {
+            await Balance.create(
+              {
+                customerId,
+                amount: net,
+              },
+              {
+                transaction: t,
+              },
+            );
+          } else {
+            await Balance.update(
+              {
+                amount: net,
+              },
+              {
+                where: {
+                  customerId,
+                },
+                transaction: t,
+              },
+            );
+          }
+        }
+
+        if (paymentModeId === 1 && isPrevBalanceIncluded) {
+          // CASH PAYMENT, AND CUSTOMER HAS ALSO CLEARED PREVIOUS PAYMENT
+          // SO NEED TO CLEAR CUSTOMER PREVIOUS BALANCE
+          await Balance.destroy({ where: { customerId }, transaction: t });
+        }
+
+        return order ? true : false;
+      });
     } catch (error) {
-      console.log('error update order::', error);
+      console.log('error complete payment::', error);
     }
   }
 }

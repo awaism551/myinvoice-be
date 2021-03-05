@@ -78,7 +78,26 @@ export class OrderResolver {
 
   @Mutation('completePayment')
   @UseGuards(LoginGuard)
-  async completePayment(@Args('orderId', ParseIntPipe) orderId: number) {
-    return await this.orderService.completePayment(orderId);
+  async completePayment(
+    @Args('orderId', ParseIntPipe) orderId: number,
+    @Args('isPrevBalanceIncluded') isPrevBalanceIncluded: boolean,
+    @Args('paymentModeId', ParseIntPipe) paymentModeId: number,
+    @Args('previousBalance', {
+      nullable: true,
+    })
+    previousBalance: number,
+    @Args('customerId', ParseIntPipe)
+    customerId: number,
+    @Args('net')
+    net: number,
+  ) {
+    return await this.orderService.completePayment(
+      orderId,
+      isPrevBalanceIncluded,
+      paymentModeId,
+      customerId,
+      net,
+      previousBalance,
+    );
   }
 }

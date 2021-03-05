@@ -17,6 +17,7 @@ export class BalanceService {
   async getBalanceByCustomer(customerId: number) {
     try {
       return await Balance.findOne({
+        include: [Customer],
         where: {
           customerId,
         },
